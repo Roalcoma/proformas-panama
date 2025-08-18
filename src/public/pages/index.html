@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Facturas</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Proformas</h1>
+
+        <form id="invoiceForm" class="form-section">
+            <div class="form-group">
+                <label for="serieFac">Serie de Factura:</label>
+                <input type="text" id="serieFac" name="serieFac" required placeholder="Ej: A01">
+            </div>
+            <div class="form-group">
+                <label for="numFacIni">Número de Factura Inicial:</label>
+                <input type="number" id="numFacIni" name="numFacIni" required min="1" placeholder="Ej: 1000">
+            </div>
+            <div class="form-group">
+                <label for="numFacFin">Número de Factura Final:</label>
+                <input type="number" id="numFacFin" name="numFacFin" required min="1" placeholder="Ej: 1050">
+            </div>
+            <div class="form-group">
+                <label for="templateSelect">Seleccionar Plantilla:</label>
+                <select id="templateSelect" name="templateSelect">
+                    <option value="BEAUTY">Excel Beauty</option>
+                    <option value="ACC">Excel ACC/SUP</option>
+                </select>
+            </div>
+            <button type="submit" id="generateBtn">Generar Proforma</button>
+        </form>
+
+        <div id="loading" class="loading-section" style="display: none;">
+            <p id="loadingMessage">Iniciando la generación de documentos...</p>
+            <div class="progress-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <div class="document-preview-animation-container">
+                <div id="generatedFilesPreview" class="generated-files-preview">
+                </div>
+            </div>
+            <div class="spinner"></div> 
+        </div>
+
+        <div id="downloadSection" class="download-section" style="display: none;">
+            <p id="message">¡Proformas generadas con éxito!</p>
+            <button id="downloadBtn">Descargar Todas las Proformas</button>
+            <button id="resetBtn">Generar Otra Proforma</button>
+        </div>
+
+        <div id="errorSection" class="error-section" style="display: none;">
+            <p class="error-message"></p>
+            <button id="errorResetBtn">Volver al Formulario</button>
+        </div>
+    </div>
+
+    <div id="previewModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-button">&times;</span>
+            <h2 id="preview-proformas">Previsualización de Facturas a Generar</h2>
+            <div class="modal-body-scrollable" id="modalBodyScrollable">
+                </div>
+            <div class="modal-footer">
+                <button id="confirmGenerateBtn">Confirmar y Generar Todo</button>
+                <button id="cancelGenerateBtn">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,521 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+/* --- Globales y Resets --- */
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Evita el scroll si el contenido es más pequeño que la ventana */
+    font-family: 'Open Sans', sans-serif;
+    color: #fff; /* Color de texto por defecto para que contraste con el fondo oscuro */
+}
+
+/* --- Fondo de la página (similar al de la imagen, sin blur adicional) --- */
+body {
+    background-image: url('https://i.ibb.co/99ZYcFVJ/fondo.jpg'); /* Ajusta la ruta de la imagen según tu estructura */
+    background-size: cover; /* Cubre todo el área */
+    background-position: center center; /* Centra la imagen */
+    background-repeat: no-repeat; /* No repite la imagen */
+}
+
+/* Un overlay para el body si el filtro no es suficiente o se quiere más control */
+/* Este overlay sigue siendo útil para asegurar una oscuridad consistente */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /*background-color: rgba(0, 0, 0, 0.4);*/ /* Capa oscura semitransparente */
+    z-index: -1; /* Asegura que esté detrás del contenido */
+}
+
+
+/* --- Contenedor Principal (para el formulario) --- */
+.container {
+    position: relative; /* Para que el pseudo-elemento de la línea vertical funcione */
+    z-index: 1; /* Para que esté por encima del fondo */
+    display: flex;
+    flex-direction: column; /* Organiza los elementos en columna */
+    align-items: center; /* Centra horizontalmente los elementos hijos */
+    justify-content: center; /* Centra verticalmente en el body */
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente para el contenedor */
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Sombra para el contenedor */
+    max-width: 500px; /* Ancho máximo para el formulario */
+    margin: auto; /* Centra el contenedor en la página */
+    text-align: center;
+}
+
+/* Título */
+.container h1 {
+    color: #fff;
+    margin-bottom: 30px;
+    font-size: 2em;
+    /*text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);*/
+}
+
+/* --- Secciones del formulario --- */
+.form-section,
+.loading-section,
+.download-section,
+.error-section {
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo ligero para la sección */
+    padding: 25px;
+    border-radius: 8px;
+    width: 100%; /* Ocupa el ancho del contenedor */
+    max-width: 400px; /* Ancho máximo para las secciones internas */
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left; /* Alinea etiquetas a la izquierda */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: #f0f0f0; /* Color claro para las etiquetas */
+}
+
+/* --- Estilo de Inputs y Selects --- */
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente para los inputs */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Borde sutil */
+    border-radius: 4px;
+    color: #fff; /* Texto blanco */
+    font-size: 1em;
+    outline: none; /* Quitar el contorno al enfocar */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3); /* Sombra interna para profundidad */
+    transition: all 0.3s ease;
+}
+
+input[type="text"]::placeholder,
+input[type="number"]::placeholder {
+    color: rgba(255, 255, 255, 0.6); /* Color del placeholder */
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+    border-color: #88bb25; /* Borde verde al enfocar */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5), 0 0 8px rgba(136, 187, 37, 0.6); /* Sombra exterior verde */
+}
+
+/* Estilo específico para el select, si es necesario */
+select {
+    appearance: none; /* Elimina la flecha predeterminada del sistema */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2C197.978L147.2%2C58.178c-4.724-4.724-12.392-4.724-17.116%2C0L5.4%2C197.978c-4.724%2C4.724-4.724%2C12.392%2C0%2C17.116s12.392%2C4.724%2C17.116%2C0l116.884-116.884L269.884%2C215.094c4.724%2C4.724%2C12.392%2C4.724%2C17.116%2C0S291.724%2C202.702%2C287%2C197.978z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+    padding-right: 30px; /* Espacio para la flecha personalizada */
+}
+
+/* --- Botones --- */
+button {
+    display: block; /* Ocupa todo el ancho disponible */
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 15px; /* Espacio superior */
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+/* Botón "Generar Factura" y "Descargar Proforma" */
+#generateBtn,
+#downloadBtn,
+#errorResetBtn {
+    background-color: #72a120; /* Color base del verde */
+    background-image: linear-gradient(to bottom, #a0d13a, #72a120);
+    border: 1px solid #5a8a18;
+    color: #ffffff;
+}
+
+#generateBtn:hover,
+#downloadBtn:hover,
+#errorResetBtn:hover {
+    background-color: #a0d13a; /* Un poco más claro al pasar el ratón */
+    background-image: linear-gradient(to bottom, #72a120, #a0d13a); /* Invertir degradado para efecto hover */
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* Botón "Generar Otra Proforma" */
+#resetBtn {
+    background-color: #555; /* Un gris oscuro */
+    background-image: linear-gradient(to bottom, #777, #555);
+    border: 1px solid #444;
+    color: #ffffff;
+}
+
+#resetBtn:hover {
+    background-color: #777;
+    background-image: linear-gradient(to bottom, #555, #777);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* --- Secciones de estado (carga, descarga, error) --- */
+.loading-section p,
+.download-section p,
+.error-section p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    color: #f0f0f0;
+}
+
+.error-message {
+    color: #ff6347; /* Rojo para mensajes de error */
+    font-weight: 600;
+}
+
+/* Spinner de carga */
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #88bb25; /* El color verde del spinner */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+/* ... (tu CSS existente, incluyendo el del spinner si quieres mantenerlo) ... */
+
+/* Estilos para la sección de carga con simulación */
+.loading-section {
+    display: flex; /* Usamos flexbox para organizar los elementos */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo ligero para la sección */
+    padding: 30px; /* Más padding para el contenido de simulación */
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px; /* Ancho máximo similar al formulario */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#loadingMessage {
+    font-size: 1.2em;
+    margin-bottom: 25px;
+    color: #f0f0f0;
+}
+
+/* Contenedor de la barra de progreso */
+.progress-container {
+    width: 80%;
+    height: 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    overflow: hidden; /* Para que la barra no se salga del contenedor */
+    margin-bottom: 30px;
+}
+
+.progress-bar {
+    width: 0%; /* Empieza en 0 */
+    height: 100%;
+    background-color: #88bb25; /* El color verde de progreso */
+    border-radius: 8px;
+    transition: width 0.5s ease-out; /* Transición suave para el progreso */
+}
+
+/* Contenedor de la vista previa del documento simulado */
+.document-preview {
+    width: 70%; /* Ancho de la "página" simulada */
+    height: 200px; /* Altura de la "página" */
+    background-color: rgba(255, 255, 255, 0.05); /* Fondo muy claro para la página */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative; /* Para posicionar los elementos del documento */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 15px; /* Padding interno para los elementos del documento */
+}
+
+.doc-element {
+    background-color: rgba(255, 255, 255, 0.2); /* Color de los elementos del documento */
+    border-radius: 3px;
+    margin-bottom: 10px;
+    opacity: 0; /* Empiezan ocultos */
+    transform: translateY(10px); /* Un poco hacia abajo */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.doc-element.header {
+    width: 80%;
+    height: 15px;
+    margin-left: 10%;
+}
+
+.doc-element.table {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 100px; /* Altura total de la tabla simulada */
+    margin-left: 5%;
+    padding: 5px; /* Padding interno de la tabla */
+    background-color: rgba(255, 255, 255, 0.08); /* Fondo ligeramente diferente para la tabla */
+}
+
+.doc-element.table .table-row {
+    height: 8px; /* Altura de cada "fila" */
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-bottom: 4px;
+    width: 100%;
+}
+
+.doc-element.footer {
+    width: 60%;
+    height: 10px;
+    margin-left: 20%;
+}
+
+/* Clases para hacer aparecer los elementos */
+.doc-element.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Sección de Carga - Ajustes de centrado y diseño */
+.loading-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos hijos horizontalmente */
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px; /* Asegura que la sección no sea demasiado ancha */
+    margin: 20px auto; /* Centra la sección dentro del contenedor */
+    text-align: center;
+}
+
+/* Contenedor de la vista previa del documento simulado */
+.document-preview-animation-container {
+    width: 80%; /* Ancho similar al de la barra de progreso */
+    height: 150px; /* Altura para mostrar varios nombres de archivo */
+    background-color: rgba(255, 255, 255, 0.05); /* Fondo muy claro para el área */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    /* Ocultar la barra de scroll */
+    overflow-y: scroll; /* Asegura que el contenido se pueda desplazar */
+    scrollbar-width: none; /* Para Firefox */
+    -ms-overflow-style: none;  /* Para IE y Edge */
+    /* Fin de ocultar la barra de scroll */
+    margin-top: 20px;
+    padding: 10px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Para navegadores basados en Webkit (Chrome, Safari) */
+.document-preview-animation-container::-webkit-scrollbar {
+    display: none; /* Oculta la barra de scroll */
+}
+
+/* Estilos para los nombres de archivo que van apareciendo */
+.generated-files-preview .file-name-item {
+    color: #f0f0f0;
+    font-size: 0.9em;
+    padding: 5px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.05s ease-out, transform 0.05s ease-out;
+    text-align: left; /* Alinea los nombres de archivo a la izquierda dentro de su contenedor */
+}
+
+.generated-files-preview .file-name-item:last-child {
+    border-bottom: none;
+}
+
+.generated-files-preview .file-name-item.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Estilos generales del modal (mantener los previos, si los tienes) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Permanece en la misma posición incluso al desplazarse */
+    z-index: 1000; /* Se superpone a todo lo demás */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    background-color: rgba(0,0,0,0.4); /* Fondo semi-transparente */
+    display: flex; /* Para centrar el contenido */
+    justify-content: center; /* Centrado horizontal */
+    align-items: center; /* Centrado vertical */
+}
+
+/* Contenido del modal */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto; /* Centrado */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; /* Ancho del contenido del modal */
+    max-width: 700px; /* Ancho máximo para el modal, ajustado para más contenido */
+    height: 80%; /* Altura del modal */
+    max-height: 90vh; /* Altura máxima para no desbordar la ventana */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 8px;
+    position: relative; /* Para posicionar el botón de cerrar */
+    display: flex; /* Para organizar el header, body y footer */
+    flex-direction: column; /* Organizar en columna */
+}
+
+/* Botón de cerrar */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+/* Estilos para el contenedor scrollable de las facturas */
+.modal-body-scrollable {
+    flex-grow: 1; /* Permite que este div ocupe todo el espacio disponible */
+    overflow-y: auto; /* Habilita el scroll vertical cuando el contenido excede el alto */
+    padding: 10px 0; /* Espacio interno para el scroll */
+    margin-bottom: 15px; /* Espacio antes del footer */
+    border-top: 1px solid #eee; /* Separador visual */
+    border-bottom: 1px solid #eee; /* Separador visual */
+}
+
+/* Estilos para cada tarjeta de previsualización de factura */
+.invoice-preview-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px; /* Espacio entre tarjetas */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.invoice-preview-card:last-child {
+    margin-bottom: 0; /* No hay margen inferior para la última tarjeta */
+}
+
+.invoice-preview-card p {
+    margin: 5px 0;
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+.invoice-preview-card strong {
+    color: #555;
+    display: inline-block; /* Para que el texto de la etiqueta no se separe */
+    min-width: 120px; /* Para alinear las etiquetas */
+}
+
+/* Estilos para el pie del modal */
+.modal-footer {
+    padding-top: 15px;
+    text-align: right;
+    margin-top: auto; /* Empuja el footer al final */
+    align-self: center;
+}
+
+.modal-footer button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+#confirmGenerateBtn {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+}
+
+#confirmGenerateBtn:hover {
+    background-color: #45a049;
+}
+
+#cancelGenerateBtn {
+    background-color: #f44336; /* Rojo */
+    color: white;
+}
+
+#cancelGenerateBtn:hover {
+    background-color: #da190b;
+}
+
+.modal {
+    color: black;
+}
+
+/* Asegúrate de que esto esté presente para ocultar el modal inicialmente */
+.modal {
+    display: none;
+}
+
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* --- Media Queries para responsividad --- */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+        max-width: 90%;
+    }
+
+    .container h1 {
+        font-size: 1.8em;
+    }
+
+    .form-section,
+    .loading-section,
+    .download-section,
+    .error-section {
+        padding: 20px;
+    }
+
+    button {
+        padding: 10px 15px;
+        font-size: 1em;
+    }
+}

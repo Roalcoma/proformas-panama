@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login de Acceso</title>
+    <link rel="stylesheet" href="styles/login.css">
+</head>
+<body>
+    <div class="logo">
+        <img src="https://i.ibb.co/k6GjPTxN/logo.png" alt="">
+    </div>
+    <div class="linea"></div>
+    <div class="login">
+        <form id="loginForm" class="login-form">
+            <h1>Acceso al Sistema</h2>
+            
+            <div class="input-group">
+                <input type="password" id="password" name="password" placeholder="Contraseña">
+            </div>
+
+            <div class="input-group">
+                <select id="companySelect" name="company" required>
+                    <option value="">Selecciona una empresa</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block btn-large">Iniciar Sesión</button>
+            <p id="errorMessage" class="error-message"></p>
+        </form>
+    </div>
+
+    <script src="src/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  app:
+    # Usa el nombre exacto de la imagen que cargaste
+    image: proformas-panama:latest
+    container_name: proformas-panama
+    restart: always
+    ports:
+      - "9000:9000"
+    env_file:
+      - ./.env
