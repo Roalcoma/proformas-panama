@@ -286,7 +286,7 @@ export async function excelEcuador(dataToInsert: any, items: any, tipoExcel: Str
         totalBrutoCell.value = dataToInsert.totalBruto;
         totalBrutoCell.border = boldBorderStyle; // Aplicar borde
 
-        const totalNetoCell = worksheet.getCell(`K${realRowsTotal + 2}`);
+        const totalNetoCell = worksheet.getCell(`K${realRowsTotal + 3}`);
         totalNetoCell.value = dataToInsert.totalNeto;
         totalNetoCell.border = boldBorderStyle; // Aplicar borde
 

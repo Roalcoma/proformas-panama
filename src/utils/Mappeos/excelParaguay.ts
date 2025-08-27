@@ -121,7 +121,7 @@ export async function excelParaguay(dataToInsert: any, items: any, tipoExcel: St
     totalBrutoCell.value = dataToInsert.totalBruto;
     totalBrutoCell.border = boldBorderStyle; // Aplicar borde
 
-    const totalNetoCell = worksheet.getCell(`I${realRowsTotal + 2}`);
+    const totalNetoCell = worksheet.getCell(`I${realRowsTotal + 3}`);
     totalNetoCell.value = dataToInsert.totalNeto;
     totalNetoCell.border = boldBorderStyle; // Aplicar borde
 
