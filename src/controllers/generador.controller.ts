@@ -92,9 +92,11 @@ export class GeneradorController {
 
                 arrayData.push(sampleData);
 
+                console.log('Empieza la creación del archivo Excel');
+
                 const archivoExcel = await generateExcel(sampleData, tipoExcel as string);
 
-                console.log('Datos de los ítems obtenidos:', sampleData);
+                console.log('Archivo Excel generado:', archivoExcel);
             }
 
             res.status(200).json({
