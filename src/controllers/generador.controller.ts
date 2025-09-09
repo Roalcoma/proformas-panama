@@ -132,45 +132,69 @@ export class GeneradorController {
 
     static async downloadZip(req: express.Request, res: express.Response): Promise<void> {
         try {
-            const zipFileName = `Facturas_${serieFac}_${numFacIni}_${numFacFin}_${tipoExcelLet}.zip`; // Añadido Date.now() para nombre único
+            const zipFileName = `Facturas_${serieFac}_${numFacIni}_${numFacFin}_${tipoExcelLet}.zip`;
             const zipFilePath = path.join(outputDir, zipFileName);
+            
+            // Verificar si el archivo ya existe
+            if (fs.existsSync(zipFilePath)) {
+                console.log('Archivo ZIP ya existe, enviando directamente:', zipFileName);
+                
+                // Leer el archivo y enviarlo
+                const fileBuffer = fs.readFileSync(zipFilePath);
+                
+                // Configurar headers para forzar descarga con nombre específico
+                res.setHeader('Content-Type', 'application/zip');
+                res.setHeader('Content-Disposition', `attachment; filename*=UTF-8''${encodeURIComponent(zipFileName)}`);
+                res.setHeader('Content-Length', fileBuffer.length);
+                res.send(fileBuffer);
+                
+                // Limpiar después de enviar
+                setTimeout(async () => {
+                    try {
+                        const filesAndDirsInOutputDir = await fs.promises.readdir(outputDir);
+                        for (const item of filesAndDirsInOutputDir) {
+                            const itemPath = path.join(outputDir, item);
+                            await fs.promises.rm(itemPath, { recursive: true, force: true });
+                        }
+                        console.log('Limpieza completada.');
+                    } catch (cleanupErr: any) {
+                        console.error('Error en limpieza:', cleanupErr.message);
+                    }
+                }, 1000);
+                return;
+            }
+
+            // Si no existe, crearlo
             const output = fs.createWriteStream(zipFilePath);
             const archive = archiver('zip', {
-                zlib: { level: 9 } // Nivel de compresión (0-9)
+                zlib: { level: 9 }
             });
 
             output.on('close', () => {
                 console.log(`ZIP creado: ${archive.pointer()} bytes en ${zipFilePath}`);
-                // =========================================================
-                // 5. ENVIAR EL ARCHIVO ZIP PARA DESCARGA
-                // =========================================================
-                res.download(zipFilePath, zipFileName, async (err) => {
-                    if (err) {
-                        console.error('Error al descargar el ZIP con res.download():', err);
-                    } else {
-                        console.log('ZIP enviado al cliente con éxito.');
-                    }
-                    // ===================================================================
-                    // 6. LIMPIAR TODOS LOS ARCHIVOS Y CARPETAS EN EL DIRECTORIO DE SALIDA
-                    //    (Esta parte se ejecuta después de intentar la descarga)
-                    // ===================================================================
+                
+                // Leer el archivo y enviarlo
+                const fileBuffer = fs.readFileSync(zipFilePath);
+                
+                console.log('Enviando archivo con nombre:', zipFileName);
+                res.setHeader('Content-Type', 'application/zip');
+                res.setHeader('Content-Disposition', `attachment; filename*=UTF-8''${encodeURIComponent(zipFileName)}`);
+                res.setHeader('Content-Length', fileBuffer.length);
+                res.send(fileBuffer);
+
+                // Limpiar después de enviar
+                setTimeout(async () => {
                     try {
-                        console.log('Iniciando limpieza de TODOS los archivos y subcarpetas en el directorio de salida...');
                         const filesAndDirsInOutputDir = await fs.promises.readdir(outputDir);
-                        
                         for (const item of filesAndDirsInOutputDir) {
                             const itemPath = path.join(outputDir, item);
-                            // fs.promises.rm es robusto: borra archivos o directorios.
-                            // recursive: true para borrar contenido de subcarpetas (si las hubiera).
-                            // force: true para ignorar errores si el archivo/carpeta ya no existe (ej. si se borró manualmente).
                             await fs.promises.rm(itemPath, { recursive: true, force: true });
-                            console.log(`Eliminado: ${itemPath}`);
                         }
-                        console.log('Todos los archivos y carpetas en el directorio de salida han sido eliminados.');
+                        console.log('Limpieza completada.');
                     } catch (cleanupErr: any) {
-                        console.error('Error al limpiar TODO el directorio de salida:', cleanupErr.message);
+                        console.error('Error en limpieza:', cleanupErr.message);
                     }
-                });
+                }, 1000);
             });
 
             archive.on('warning', (err) => {
@@ -179,51 +203,41 @@ export class GeneradorController {
 
             archive.on('error', (err) => {
                 console.error('Archiver error FATAL:', err.message);
-                // Si el error ocurre en archiver antes de que se envíe la respuesta,
-                // lanza el error para que el bloque try/catch superior lo maneje.
                 throw err; 
             });
 
             archive.pipe(output);
 
-            console.log('Añadiendo archivos al ZIP desde el directorio de salida...');
+            console.log('Añadiendo archivos al ZIP...');
             try {
-                // Leer todos los elementos (archivos y carpetas) en el directorio outputDir
                 const filesInOutputDir = await fs.promises.readdir(outputDir);
-                
-                // Filtrar solo los archivos que serán comprimidos.
-                // Excluye el propio archivo ZIP que se está creando para evitar errores.
                 const filesToCompress = filesInOutputDir.filter(item => 
-                    item !== zipFileName && (item.endsWith('.xlsx') || item.endsWith('.pdf')) // Puedes añadir más extensiones si lo necesitas
+                    item !== zipFileName && (item.endsWith('.xlsx') || item.endsWith('.pdf'))
                 );
 
                 if (filesToCompress.length === 0) {
-                    console.warn('Advertencia: No se encontraron archivos relevantes en el directorio de salida para comprimir. El ZIP podría estar vacío.');
+                    console.warn('No se encontraron archivos para comprimir.');
                 }
 
                 for (const fileName of filesToCompress) {
                     const filePath = path.join(outputDir, fileName);
                     const stats = await fs.promises.stat(filePath);
-                    if (stats.isFile()) { // Asegurarse de que es un archivo y no una carpeta
-                        console.log(`Añadiendo '${fileName}' desde '${filePath}' al ZIP.`);
-                        archive.file(filePath, { name: fileName }); // 'name' es el nombre del archivo dentro del ZIP
-                    } else {
-                        console.log(`Saltando '${fileName}' (no es un archivo o no tiene la extensión deseada).`);
+                    if (stats.isFile()) {
+                        console.log(`Añadiendo '${fileName}' al ZIP.`);
+                        archive.file(filePath, { name: fileName });
                     }
                 }
             } catch (readDirError: any) {
-                console.error('Error al leer el directorio de salida para añadir archivos al ZIP:', readDirError.message);
-                // Propagar el error para que sea capturado por el bloque try/catch superior.
-                throw new Error('No se pudo leer el directorio de archivos para comprimir.'); 
+                console.error('Error al leer directorio:', readDirError.message);
+                throw new Error('No se pudo leer el directorio de archivos.');
             }
 
-            console.log('Finalizando el archivo ZIP...');
-            // Finaliza el archivo ZIP. Esto es CRÍTICO para que el ZIP se complete.
-            // Disparará el evento 'output.on("close")' cuando termine de escribir.
+            console.log('Finalizando ZIP...');
             await archive.finalize();
         } catch (error) {
-            console.error('Error al crear el archivo ZIP:', error);
+            console.error('Error al crear ZIP:', error);
             res.status(500).send('Error al crear el archivo ZIP.');
         }
     }
+
 }

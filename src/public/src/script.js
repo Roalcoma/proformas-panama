@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log(DB)
 
-        const facturasResponse = await fetch(`http://172.20.1.67:9000/generador/preview-proformas?numSerie=${serieFac}&numFacturaIni=${numFacIni}&numFacturaFin=${numFacFin}&db=${DB}`, {
+        const facturasResponse = await fetch(`http://127.0.0.1:9000/generador/preview-proformas?numSerie=${serieFac}&numFacturaIni=${numFacIni}&numFacturaFin=${numFacFin}&db=${DB}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animateProgress();
 
         try {
-            const responsePromise = fetch(`http://172.20.1.67:9000/generador/process-template?numSerie=${serieFac}&numFacturaIni=${numFacIni}&numFacturaFin=${numFacFin}&tipoExcel=${selectedTemplate}&db=${DB}`, {
+            const responsePromise = fetch(`http://127.0.0.1:9000/generador/process-template?numSerie=${serieFac}&numFacturaIni=${numFacIni}&numFacturaFin=${numFacFin}&tipoExcel=${selectedTemplate}&db=${DB}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -301,7 +301,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     downloadBtn.addEventListener('click', async () => {
         try {
-            const response = await fetch(`http://172.20.1.67:9000/generador/download-zip`, {
+            // Construir el nombre del archivo usando los datos del formulario
+            const serieFac = serieFacInput.value;
+            const numFacIni = parseInt(numFacIniInput.value, 10);
+            const numFacFin = parseInt(numFacFinInput.value, 10);
+            const selectedTemplate = templateSelect.value;
+            
+            const customFilename = `Facturas_${serieFac}_${numFacIni}_${numFacFin}_${selectedTemplate}.zip`;
+            console.log('Nombre de archivo construido localmente:', customFilename);
+
+            const response = await fetch(`http://127.0.0.1:9000/generador/download-zip`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -319,32 +328,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(errorData.message || 'Error en la descarga del archivo.');
             }
 
-            const contentDisposition = response.headers.get('Content-Disposition');
-            let filename = 'facturas_generadas.zip';
-            if (contentDisposition && contentDisposition.includes('filename=')) {
-                const filenameMatch = contentDisposition.match(/filename\*?=['"]?(?:UTF-\d['"]*)?([^;\n]*?)['"]?$/i);
-                if (filenameMatch && filenameMatch[1]) {
-                    try {
-                        filename = decodeURIComponent(filenameMatch[1].replace(/^UTF-8''/, ''));
-                    } catch (e) {
-                        console.warn('No se pudo decodificar el nombre de archivo del Content-Disposition:', e);
-                        filename = filenameMatch[1].replace(/^UTF-8''/, '');
-                    }
-                }
-            }
-
+            // Usar el nombre construido localmente en lugar de depender de headers
             const blob = await response.blob();
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.style.display = 'none';
             a.href = url;
-            a.download = filename;
+            a.download = customFilename; // Usar el nombre construido localmente
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
 
-            messageElement.textContent = `¡${filename} generado y descarga iniciada!`;
+            console.log('Descarga iniciada con nombre:', customFilename);
+            messageElement.textContent = `¡${customFilename} generado y descarga iniciada!`;
         } catch (error) {
             console.error('Error en la descarga:', error);
             errorMessageElement.textContent = `Error de descarga: ${error.message}`;

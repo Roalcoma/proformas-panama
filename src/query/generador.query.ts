@@ -566,10 +566,10 @@ export const querys = {
             OR CODPAIS LIKE '%GT%'
             OR CODPAIS LIKE '%PE%'
             OR CODPAIS LIKE '%PY%'
-            OR CODPAIS LIKE '%RD%'
             OR CODPAIS LIKE '%SV%'
             OR CODPAIS LIKE '%UY%'
-            OR CODPAIS LIKE '%VE%')
+            OR CODPAIS LIKE '%VE%'
+            OR CODPAIS LIKE '%DO%')
     `
   
 };

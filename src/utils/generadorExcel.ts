@@ -12,6 +12,7 @@ import { excelVenezuela } from './Mappeos/excelVenezuela';
 import { excelEcuador } from './Mappeos/excelEcuador';
 import { excelArgentina } from './Mappeos/excelArgentina';
 import { excelPeru } from './Mappeos/excelPeru';
+import { excelGuatemala } from './Mappeos/excelGuatemala';
 
 // Ruta al directorio de plantillas
 const templatesDir = path.join(__dirname, '..', 'templates');
@@ -65,6 +66,12 @@ export async function generateExcel(sampleData: any, tipoExcel: String): Promise
 
     if (dataToInsert.invoicePais === 'CO') {
         const newFilePath = await excelColombia(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
+        console.log('Archivo generado en:', newFilePath);
+        return newFilePath;
+    }
+
+    if (dataToInsert.invoicePais === 'GT') {
+        const newFilePath = await excelGuatemala(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
         console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
