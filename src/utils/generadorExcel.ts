@@ -72,6 +72,12 @@ export async function generateExcel(sampleData: any, tipoExcel: String): Promise
         return newFilePath;
     }
 
+    if (dataToInsert.invoicePais === 'GT') {
+        const newFilePath = await excelGuatemala(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
+        console.log('Archivo generado en:', newFilePath);
+        return newFilePath;
+    }
+
     if (dataToInsert.invoicePais === 'CW') {
         const newFilePath = await excelCuracao(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
         console.log('Archivo generado en:', newFilePath);
