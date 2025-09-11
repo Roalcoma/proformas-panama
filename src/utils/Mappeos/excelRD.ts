@@ -46,9 +46,9 @@ export async function excelRD(dataToInsert: any, items: any, tipoExcel: String, 
 
         // --- Lógica para INSERTAR nuevos ítems sin eliminar filas ---
 
-        const startRowForItems = 12; // La fila donde se empezará a insertar los ítems.
+        const startRowForItems = 13; // La fila donde se empezará a insertar los ítems.
                                 // Todas las filas desde aquí hacia abajo se desplazarán.
-        const startRowForTotals = 13; // Fila donde empiezan los totales.
+        const startRowForTotals = 14; // Fila donde empiezan los totales.
 
         const realRowsTotal = startRowForTotals + items.length
 
@@ -105,15 +105,15 @@ export async function excelRD(dataToInsert: any, items: any, tipoExcel: String, 
 
         const totalUnidadesCell = worksheet.getCell(`C${realRowsTotal}`);
         totalUnidadesCell.value = dataToInsert.totalUnidades;
-        totalUnidadesCell.border = boldBorderStyle; // Aplicar borde
+        //totalUnidadesCell.border = boldBorderStyle; // Aplicar borde
 
         const pesoBruto = worksheet.getCell(`C${realRowsTotal + 2}`);
         pesoBruto.value = dataToInsert.clientPeso;
-        pesoBruto.border = boldBorderStyle; // Aplicar borde
+        //pesoBruto.border = boldBorderStyle; // Aplicar borde
 
         const totalCajas = worksheet.getCell(`C${realRowsTotal + 1}`);
         totalCajas.value = dataToInsert.clientBulto;
-        totalCajas.border = boldBorderStyle; // Aplicar borde
+        //totalCajas.border = boldBorderStyle; // Aplicar borde
 
         const formaPago = worksheet.getCell(`A${realRowsTotal + 4}`);
         formaPago.value = `Forma de Pago: ${dataToInsert.clientFormaPago}`;
@@ -126,11 +126,11 @@ export async function excelRD(dataToInsert: any, items: any, tipoExcel: String, 
 
         const totalBrutoCell = worksheet.getCell(`I${realRowsTotal}`);
         totalBrutoCell.value = dataToInsert.totalBruto;
-        totalBrutoCell.border = boldBorderStyle; // Aplicar borde
+        //totalBrutoCell.border = boldBorderStyle; // Aplicar borde
 
         const totalNetoCell = worksheet.getCell(`I${realRowsTotal + 2}`);
         totalNetoCell.value = dataToInsert.totalNeto;
-        totalNetoCell.border = boldBorderStyle; // Aplicar borde
+        //totalNetoCell.border = boldBorderStyle; // Aplicar borde
 
         const lastRowBeauty = worksheet.lastRow.number;
         worksheet.pageSetup.printArea = `A1:I${lastRowBeauty}`;
@@ -247,15 +247,15 @@ export async function excelRD(dataToInsert: any, items: any, tipoExcel: String, 
 
         const totalUnidadesCell = worksheet.getCell(`C${realRowsTotal}`);
         totalUnidadesCell.value = dataToInsert.totalUnidades;
-        totalUnidadesCell.border = boldBorderStyle; // Aplicar borde
+        //totalUnidadesCell.border = boldBorderStyle; // Aplicar borde
 
         const pesoBruto = worksheet.getCell(`C${realRowsTotal + 2}`);
         pesoBruto.value = dataToInsert.clientPeso;
-        pesoBruto.border = boldBorderStyle; // Aplicar borde
+        //pesoBruto.border = boldBorderStyle; // Aplicar borde
 
         const totalCajas = worksheet.getCell(`C${realRowsTotal + 1}`);
         totalCajas.value = dataToInsert.clientBulto;
-        totalCajas.border = boldBorderStyle; // Aplicar borde
+        //totalCajas.border = boldBorderStyle; // Aplicar borde
 
         const formaPago = worksheet.getCell(`A${realRowsTotal + 4}`);
         formaPago.value = `Forma de Pago: ${dataToInsert.clientFormaPago}`;
@@ -268,11 +268,11 @@ export async function excelRD(dataToInsert: any, items: any, tipoExcel: String, 
 
         const totalBrutoCell = worksheet.getCell(`I${realRowsTotal}`);
         totalBrutoCell.value = dataToInsert.totalBruto;
-        totalBrutoCell.border = boldBorderStyle; // Aplicar borde
+        //totalBrutoCell.border = boldBorderStyle; // Aplicar borde
 
         const totalNetoCell = worksheet.getCell(`I${realRowsTotal + 2}`);
         totalNetoCell.value = dataToInsert.totalNeto;
-        totalNetoCell.border = boldBorderStyle; // Aplicar borde
+        //totalNetoCell.border = boldBorderStyle; // Aplicar borde
 
         const lastRowBeauty = worksheet.lastRow.number;
         worksheet.pageSetup.printArea = `A1:I${lastRowBeauty}`;
