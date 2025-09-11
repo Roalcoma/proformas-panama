@@ -132,6 +132,10 @@ export async function excelSalvador(dataToInsert: any, items: any, tipoExcel: St
         totalNetoCell.value = dataToInsert.totalNeto;
         totalNetoCell.border = boldBorderStyle; // Aplicar borde
 
+        const lastRowBeauty = worksheet.lastRow.number;
+        worksheet.pageSetup.printArea = `A1:K${lastRowBeauty}`;
+        worksheet.views = [{ state: 'normal', showGridLines: true }];
+
         const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
         newFilePath = path.join(outputDir, newFileName);
 
@@ -265,6 +269,10 @@ export async function excelSalvador(dataToInsert: any, items: any, tipoExcel: St
         const totalNetoCell = worksheet.getCell(`I${realRowsTotal}`);
         totalNetoCell.value = dataToInsert.totalNeto;
         totalNetoCell.border = boldBorderStyle; // Aplicar borde
+
+        const lastRowBeauty = worksheet.lastRow.number;
+        worksheet.pageSetup.printArea = `A1:I${lastRowBeauty}`;
+        worksheet.views = [{ state: 'normal', showGridLines: true }];
 
         const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
         newFilePath = path.join(outputDir, newFileName);

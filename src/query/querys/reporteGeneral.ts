@@ -64,7 +64,8 @@ export const reporteGeneral = `
         LIN.TOTAL AS TOTAL_LOC,
         TA.TOTAL_NETO,
         TA.TOTAL_BRUTO,
-        TA.TOTAL_UNIDADES
+        TA.TOTAL_UNIDADES,
+        DESCADIC_RS_PMA_CR
     FROM
         BBW_NEW.DBO.ALBVENTACAB AS CAB
     INNER JOIN

@@ -36,7 +36,7 @@ export async function generateExcel(sampleData: any, tipoExcel: String): Promise
 
     console.log('Estoy en generador excel')
 
-    console.log('Datos a insertar:', dataToInsert);
+    //console.log('Datos a insertar:', dataToInsert);
 
     const items = dataToInsert.items;
     if (!items || items.length === 0) {
@@ -52,89 +52,90 @@ export async function generateExcel(sampleData: any, tipoExcel: String): Promise
         throw new Error('Error: No se encontró la hoja de trabajo en la plantilla.');
     }
 
-    console.log('Worksheet found:', worksheet);
+    //console.log('Worksheet found:', worksheet);
 
     if (dataToInsert.invoicePais === 'PA') {
         const newFilePath = await excelPanama(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-        console.log('Archivo generado en:', newFilePath);
+        //console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
 
     if (dataToInsert.invoicePais === 'SV') {
         const newFilePath = await excelSalvador(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-        console.log('Archivo generado en:', newFilePath);
+        //console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
 
     if (dataToInsert.invoicePais === 'CO') {
         const newFilePath = await excelColombia(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-        console.log('Archivo generado en:', newFilePath);
+        //console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
 
     if (dataToInsert.invoicePais === 'GT') {
         const newFilePath = await excelGuatemala(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-        console.log('Archivo generado en:', newFilePath);
+        //console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
 
     if (dataToInsert.invoicePais === 'CW') {
         const newFilePath = await excelCuracao(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-        console.log('Archivo generado en:', newFilePath);
+        //console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
 
     if (dataToInsert.invoicePais === 'PE') {
         const newFilePath = await excelPeru(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-        console.log('Archivo generado en:', newFilePath);
+        //console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
 
     if (dataToInsert.invoicePais === 'CR') {
         const newFilePath = await excelCostaRica(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-        console.log('Archivo generado en:', newFilePath);
+        //console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
 
     if (dataToInsert.invoicePais === 'EC') {
         const newFilePath = await excelEcuador(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-        console.log('Archivo generado en:', newFilePath);
+        //console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
 
     if (dataToInsert.invoicePais === 'GT') {
         const newFilePath = await excelGuatemala(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-        console.log('Archivo generado en:', newFilePath);
+        //console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
 
     if (dataToInsert.invoicePais === 'AR') {
         const newFilePath = await excelArgentina(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-        console.log('Archivo generado en:', newFilePath);
+        //console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
 
     if (dataToInsert.invoicePais === 'PY') {
         const newFilePath = await excelParaguay(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-        console.log('Archivo generado en:', newFilePath);
+        //console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
 
-    if (dataToInsert.invoicePais === 'RD') {
+    if (dataToInsert.invoicePais === 'DO') {
         const newFilePath = await excelRD(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-        console.log('Archivo generado en:', newFilePath);
+        //console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
 
     if (dataToInsert.invoicePais === 'UY') {
         const newFilePath = await excelUruguay(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-        console.log('Archivo generado en:', newFilePath);
+        //console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
 
     if (dataToInsert.invoicePais === 'VE') {
+        console.log('Estoy en excelVenezuela')
         const newFilePath = await excelVenezuela(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-        console.log('Archivo generado en:', newFilePath);
+        //console.log('Archivo generado en:', newFilePath);
         return newFilePath;
     }
 

@@ -140,6 +140,10 @@ export async function excelPanama(dataToInsert: any, items: any, tipoExcel: Stri
         totalNetoCell.value = dataToInsert.totalNeto;
         totalNetoCell.border = boldBorderStyle; // Aplicar borde
 
+        const lastRowBeauty = worksheet.lastRow.number;
+        worksheet.pageSetup.printArea = `A1:L${lastRowBeauty}`;
+        worksheet.views = [{ state: 'normal', showGridLines: true }];
+
         const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
         newFilePath = path.join(outputDir, newFileName);
 
@@ -281,6 +285,10 @@ export async function excelPanama(dataToInsert: any, items: any, tipoExcel: Stri
         const totalNetoCell = worksheet.getCell(`J${realRowsTotal + 2}`);
         totalNetoCell.value = dataToInsert.totalNeto;
         totalNetoCell.border = boldBorderStyle; // Aplicar borde
+
+        const lastRowBeauty = worksheet.lastRow.number;
+        worksheet.pageSetup.printArea = `A1:J${lastRowBeauty}`;
+        worksheet.views = [{ state: 'normal', showGridLines: true }];
 
         const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
         newFilePath = path.join(outputDir, newFileName);

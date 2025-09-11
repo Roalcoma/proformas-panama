@@ -136,6 +136,10 @@ export async function excelArgentina(dataToInsert: any, items: any, tipoExcel: S
         totalNetoCell.value = dataToInsert.totalNeto;
         totalNetoCell.border = boldBorderStyle; // Aplicar borde
 
+        const lastRowBeauty = worksheet.lastRow.number;
+        worksheet.pageSetup.printArea = `A1:K${lastRowBeauty}`;
+        worksheet.views = [{ state: 'normal', showGridLines: true }];
+
         const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
         newFilePath = path.join(outputDir, newFileName);
 
@@ -281,6 +285,10 @@ export async function excelArgentina(dataToInsert: any, items: any, tipoExcel: S
         const totalNetoCell = worksheet.getCell(`K${realRowsTotal + 3}`);
         totalNetoCell.value = dataToInsert.totalNeto;
         totalNetoCell.border = boldBorderStyle; // Aplicar borde
+
+        const lastRowBeauty = worksheet.lastRow.number;
+        worksheet.pageSetup.printArea = `A1:K${lastRowBeauty}`;
+        worksheet.views = [{ state: 'normal', showGridLines: true }];
 
         const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
         newFilePath = path.join(outputDir, newFileName);

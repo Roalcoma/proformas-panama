@@ -132,6 +132,10 @@ export async function excelPeru(dataToInsert: any, items: any, tipoExcel: String
         totalNetoCell.value = dataToInsert.totalNeto;
         totalNetoCell.border = boldBorderStyle; // Aplicar borde
 
+        const lastRowBeauty = worksheet.lastRow.number;
+        worksheet.pageSetup.printArea = `A1:J${lastRowBeauty}`;
+        worksheet.views = [{ state: 'normal', showGridLines: true }];
+
         const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
         newFilePath = path.join(outputDir, newFileName);
 
@@ -269,6 +273,10 @@ export async function excelPeru(dataToInsert: any, items: any, tipoExcel: String
         const totalNetoCell = worksheet.getCell(`I${realRowsTotal + 2}`);
         totalNetoCell.value = dataToInsert.totalNeto;
         totalNetoCell.border = boldBorderStyle; // Aplicar borde
+
+        const lastRowBeauty = worksheet.lastRow.number;
+        worksheet.pageSetup.printArea = `A1:I${lastRowBeauty}`;
+        worksheet.views = [{ state: 'normal', showGridLines: true }];
 
         const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
         newFilePath = path.join(outputDir, newFileName);

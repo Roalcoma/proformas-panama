@@ -77,11 +77,11 @@ export async function excelCostaRica(dataToInsert: any, items: any, tipoExcel: S
             cellD.border = boldBorderStyle;
 
             const cellE = worksheet.getCell(`E${currentRowForNewItems}`);
-            cellE.value = item.PRODUCTO;
+            cellE.value = item.DESCADIC_RS_PMA_CR;
             cellE.border = boldBorderStyle;
 
             const cellF = worksheet.getCell(`F${currentRowForNewItems}`);
-            cellF.value = item.DETALLE;
+            cellF.value = item.COMPOSICION;
             cellF.border = boldBorderStyle;
 
             const cellG = worksheet.getCell(`G${currentRowForNewItems}`);
@@ -135,6 +135,10 @@ export async function excelCostaRica(dataToInsert: any, items: any, tipoExcel: S
         const totalNetoCell = worksheet.getCell(`K${realRowsTotal + 2}`);
         totalNetoCell.value = dataToInsert.totalNeto;
         totalNetoCell.border = boldBorderStyle; // Aplicar borde
+
+        const lastRowBeauty = worksheet.lastRow.number;
+        worksheet.pageSetup.printArea = `A1:K${lastRowBeauty}`;
+        worksheet.views = [{ state: 'normal', showGridLines: true }];
 
         const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
         newFilePath = path.join(outputDir, newFileName);
@@ -208,11 +212,11 @@ export async function excelCostaRica(dataToInsert: any, items: any, tipoExcel: S
             cellA.border = boldBorderStyle;
 
             const cellB = worksheet.getCell(`B${currentRowForNewItems}`);
-            cellB.value = item.CONTENIDO;
+            cellB.value = item.DESCADIC_RS_PMA_CR;
             cellB.border = boldBorderStyle;
 
             const cellC = worksheet.getCell(`C${currentRowForNewItems}`);
-            cellC.value = item.DESCRIPCION;
+            cellC.value = item.COMPOSICION;
             cellC.border = boldBorderStyle;
 
             const cellD = worksheet.getCell(`D${currentRowForNewItems}`);
@@ -273,6 +277,10 @@ export async function excelCostaRica(dataToInsert: any, items: any, tipoExcel: S
         const totalNetoCell = worksheet.getCell(`I${realRowsTotal + 2}`);
         totalNetoCell.value = dataToInsert.totalNeto;
         totalNetoCell.border = boldBorderStyle; // Aplicar borde
+
+        const lastRowBeauty = worksheet.lastRow.number;
+        worksheet.pageSetup.printArea = `A1:I${lastRowBeauty}`;
+        worksheet.views = [{ state: 'normal', showGridLines: true }];
 
         const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
         newFilePath = path.join(outputDir, newFileName);

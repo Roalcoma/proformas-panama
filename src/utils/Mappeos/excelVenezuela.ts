@@ -3,6 +3,8 @@ import ExcelJS from 'exceljs';
 export async function excelVenezuela(dataToInsert: any, items: any, tipoExcel: String, workbook: any, worksheet: any, boldBorderStyle: any, outputDir: any, path: any): Promise<string> {
     let newFilePath: any = '';
 
+    console.log('Estoy en excelVenezuela, dentro de la función')
+
     const clientCodeCell = worksheet.getCell('G1');
     clientCodeCell.value = `Cliente N°: ${dataToInsert.clientCode}`;
     clientCodeCell.border = boldBorderStyle; // Aplicar borde
@@ -52,6 +54,8 @@ export async function excelVenezuela(dataToInsert: any, items: any, tipoExcel: S
     let currentRowForNewItems = startRowForItems; // La fila donde se insertará el primer nuevo ítem
     let subtotal = 0; // Si necesitas calcular un subtotal de los ítems insertados.
 
+    //console.log('items: ', items)
+
     // Itera sobre los ítems de la data
     items.forEach((item: any) => {
         
@@ -96,17 +100,19 @@ export async function excelVenezuela(dataToInsert: any, items: any, tipoExcel: S
         currentRowForNewItems++; // Avanza a la siguiente fila para el próximo ítem
     });
 
+    console.log('currentRowForNewItems: ', currentRowForNewItems)
+
     const totalUnidadesCell = worksheet.getCell(`C${realRowsTotal}`);
     totalUnidadesCell.value = dataToInsert.totalUnidades;
-    totalUnidadesCell.border = boldBorderStyle; // Aplicar borde
+    //totalUnidadesCell.border = boldBorderStyle; // Aplicar borde
 
     const pesoBruto = worksheet.getCell(`C${realRowsTotal + 2}`);
     pesoBruto.value = dataToInsert.clientPeso;
-    pesoBruto.border = boldBorderStyle; // Aplicar borde
+    //pesoBruto.border = boldBorderStyle; // Aplicar borde
 
     const totalCajas = worksheet.getCell(`C${realRowsTotal + 1}`);
     totalCajas.value = dataToInsert.clientBulto;
-    totalCajas.border = boldBorderStyle; // Aplicar borde
+    //totalCajas.border = boldBorderStyle; // Aplicar borde
 
     const formaPago = worksheet.getCell(`A${realRowsTotal + 4}`);
     formaPago.value = `Forma de Pago: ${dataToInsert.clientFormaPago}`;
@@ -119,11 +125,15 @@ export async function excelVenezuela(dataToInsert: any, items: any, tipoExcel: S
 
     const totalBrutoCell = worksheet.getCell(`I${realRowsTotal}`);
     totalBrutoCell.value = dataToInsert.totalBruto;
-    totalBrutoCell.border = boldBorderStyle; // Aplicar borde
+    //totalBrutoCell.border = boldBorderStyle; // Aplicar borde
 
     const totalNetoCell = worksheet.getCell(`I${realRowsTotal + 2}`);
     totalNetoCell.value = dataToInsert.totalNeto;
-    totalNetoCell.border = boldBorderStyle; // Aplicar borde
+    //totalNetoCell.border = boldBorderStyle; // Aplicar borde
+
+    const lastRowBeauty = worksheet.lastRow.number;
+    worksheet.pageSetup.printArea = `A1:I${lastRowBeauty}`;
+    worksheet.views = [{ state: 'normal', showGridLines: true }];
 
     const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
     newFilePath = path.join(outputDir, newFileName);
