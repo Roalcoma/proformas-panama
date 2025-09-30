@@ -212,15 +212,15 @@ export async function excelCostaRica(dataToInsert: any, items: any, tipoExcel: S
             cellA.border = boldBorderStyle;
 
             const cellB = worksheet.getCell(`B${currentRowForNewItems}`);
-            cellB.value = item.DESCADIC_RS_PMA_CR;
+            cellB.value = item.CONTENIDO;
             cellB.border = boldBorderStyle;
 
             const cellC = worksheet.getCell(`C${currentRowForNewItems}`);
-            cellC.value = item.COMPOSICION;
+            cellC.value = item.DESCADIC_RS_PMA_CR;
             cellC.border = boldBorderStyle;
 
             const cellD = worksheet.getCell(`D${currentRowForNewItems}`);
-            cellD.value = item.DETALLE;
+            cellD.value = item.COMPOSICION;
             cellD.border = boldBorderStyle;
 
             const cellE = worksheet.getCell(`E${currentRowForNewItems}`);
