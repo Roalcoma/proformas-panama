@@ -10,7 +10,7 @@ import { excelRD } from './Mappeos/excelRD';
 import { excelUruguay } from './Mappeos/excelUruguay';
 import { excelVenezuela } from './Mappeos/excelVenezuela';
 import { excelEcuador } from './Mappeos/excelEcuador';
-import { excelArgentina } from './Mappeos/excelArgentina';
+import { ClassExcelArgentina } from './Mappeos/excelArgentina';
 import { excelPeru } from './Mappeos/excelPeru';
 import { excelGuatemala } from './Mappeos/excelGuatemala';
 
@@ -111,7 +111,7 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
         }
     
         if (dataToInsert.invoicePais === 'AR') {
-            const newFilePath = await excelArgentina(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
+            const newFilePath = await ClassExcelArgentina.excelArgentina(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
             //console.log('Archivo generado en:', newFilePath);
             return newFilePath;
         }
@@ -141,6 +141,10 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
             return newFilePath;
         }
         
+    } else if (marca === 'VSFA') {
+        console.log('Estoy en VSFA')
+    } else if (marca === 'VSBA') {
+        console.log('Estoy en VSBA')
     }
 
 

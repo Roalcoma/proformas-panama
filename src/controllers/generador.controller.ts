@@ -1,6 +1,5 @@
 import express from "express";
 import archiver from "archiver";
-import ExcelJS from 'exceljs';
 import path from "path";
 import fs from "fs";
 import { GeneradorModel } from "../models/generador.model";
