@@ -94,7 +94,19 @@ export class GeneradorController {
 
                 console.log('Empieza la creación del archivo Excel');
 
-                const archivoExcel = await generateExcel(sampleData, tipoExcel as string);
+                let marca: string
+
+                if(db === 'BBW_NEW'){
+                    marca = 'BBW'
+                } else if(db === 'VSFC_PMA'){
+                    marca = 'VSFA'
+                } else if(db === 'VSBA') {
+                    marca = 'VSBA'
+                } else {
+                    marca = 'BEAUTY'
+                }
+
+                const archivoExcel = await generateExcel(sampleData, tipoExcel as string, marca);
 
                 console.log('Archivo Excel generado:', archivoExcel);
             }
