@@ -22,7 +22,7 @@ const config = (db: any) => {
 
 
 export class GeneradorModel {
-    static async getData(numSerie: string, numFac: number, tipoExcel: String, db: String): Promise<any[]> {
+    static async getData(numSerie: string, numFac: number, tipoExcel: string, db: string): Promise<any[]> {
         const pool = await connectDb(config(db));
 
         console.log(db)
@@ -31,24 +31,48 @@ export class GeneradorModel {
         if (!numSerie || !numFac || !tipoExcel) {
             throw new Error('Número de serie, número de factura y tipo de Excel son requeridos');
         }
+
+        const query = () => {
+            if(db === 'BBW_NEW'){
+                return querys.getData
+            } else if(db === 'VSFC_PMA'){
+                return querys.getDataVSFA
+            } else if(db === 'VSBA') {
+                return querys.getDataVSBA
+            } else {
+                return querys.getData
+            }
+        }
         
         const result = await pool.request()
             .input('NUMSERIEFAC', mssql.VarChar, numSerie)
             .input('NUMFAC', mssql.Int, numFac)
-            .query(querys.getData);
+            .query(query());
 
         console.log(`Datos obtenidos: ${result.recordset} registros`);
         await closeDb();
         return result.recordset;
     }
 
-    static async getDataByClient(numSerie: string, numFacturaIni: number, numFacturaFin: number, db: String): Promise<any[]> {
+    static async getDataByClient(numSerie: string, numFacturaIni: number, numFacturaFin: number, db: string): Promise<any[]> {
         const pool = await connectDb(config(db));
+
+        const query = () => {
+            if(db === 'BBW_NEW'){
+                return querys.getDataByClient
+            } else if(db === 'VSFC_PMA'){
+                return querys.getDataByClientVSFA
+            } else if(db === 'VSBA') {
+                return querys.getDataByClientVSBA
+            } else {
+                return querys.getDataByClient
+            }
+        }
         const result = await pool.request()
             .input('NUMSERIEFAC', mssql.VarChar, numSerie)
             .input('NUMFAC_INI', mssql.Int, numFacturaIni)
             .input('NUMFAC_FIN', mssql.Int, numFacturaFin)
-            .query(querys.getDataByClient);
+            .query(query());
         await closeDb();
         return result.recordset;
     }
