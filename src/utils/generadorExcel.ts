@@ -1,6 +1,6 @@
 import ExcelJS from 'exceljs';
 import path from "path";
-import { excelPanama } from './Mappeos/excelPanama';
+import { ClassExcelPanama } from './Mappeos/excelPanama';
 import { excelSalvador } from './Mappeos/excelSalvador';
 import { excelColombia } from './Mappeos/excelColombia';
 import { excelCuracao } from './Mappeos/excelCuracao';
@@ -57,7 +57,7 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
     if(marca === 'BBW') {
         console.log('Estoy en BBW')
         if (dataToInsert.invoicePais === 'PA') {
-            const newFilePath = await excelPanama(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
+            const newFilePath = await ClassExcelPanama.excelPanama(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
             //console.log('Archivo generado en:', newFilePath);
             return newFilePath;
         }
@@ -143,6 +143,11 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
         
     } else if (marca === 'VSFA') {
         console.log('Estoy en VSFA')
+        /*if (dataToInsert.invoicePais === 'PA') {
+            const newFilePath = await ClassExcelPanama.excelPanamaVSFA(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
+            //console.log('Archivo generado en:', newFilePath);
+            return newFilePath;
+        }*/
     } else if (marca === 'VSBA') {
         console.log('Estoy en VSBA')
     }

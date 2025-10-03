@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function verificarPassword(e) {
         try {
-            const fetchLogin = await fetch(`http://172.20.1.67:9000/auth/login?password=${e.target.value}`, {
+            const fetchLogin = await fetch(`http://127.0.0.1:9000/auth/login?password=${e.target.value}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'

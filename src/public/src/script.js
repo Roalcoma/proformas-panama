@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         console.log(DB)
 
-        const facturasResponse = await fetch(`http://172.20.1.67:9000/generador/preview-proformas?numSerie=${serieFac}&numFacturaIni=${numFacIni}&numFacturaFin=${numFacFin}&db=${DB}`, {
+        const facturasResponse = await fetch(`http://127.0.0.1:9000/generador/preview-proformas?numSerie=${serieFac}&numFacturaIni=${numFacIni}&numFacturaFin=${numFacFin}&db=${DB}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animateProgress();
 
         try {
-            const responsePromise = fetch(`http://172.20.1.67:9000/generador/process-template?numSerie=${serieFac}&numFacturaIni=${numFacIni}&numFacturaFin=${numFacFin}&tipoExcel=${selectedTemplate}&db=${DB}`, {
+            const responsePromise = fetch(`http://127.0.0.1:9000/generador/process-template?numSerie=${serieFac}&numFacturaIni=${numFacIni}&numFacturaFin=${numFacFin}&tipoExcel=${selectedTemplate}&db=${DB}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const customFilename = `Facturas_${serieFac}_${numFacIni}_${numFacFin}_${selectedTemplate}.zip`;
             console.log('Nombre de archivo construido localmente:', customFilename);
 
-            const response = await fetch(`http://172.20.1.67:9000/generador/download-zip`, {
+            const response = await fetch(`http://127.0.0.1:9000/generador/download-zip`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'
