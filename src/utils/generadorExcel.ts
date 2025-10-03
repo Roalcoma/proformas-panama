@@ -143,11 +143,11 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
         
     } else if (marca === 'VSFA') {
         console.log('Estoy en VSFA')
-        /*if (dataToInsert.invoicePais === 'PA') {
+        if (dataToInsert.invoicePais === 'PA') {
             const newFilePath = await ClassExcelPanama.excelPanamaVSFA(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
             //console.log('Archivo generado en:', newFilePath);
             return newFilePath;
-        }*/
+        }
     } else if (marca === 'VSBA') {
         console.log('Estoy en VSBA')
     }

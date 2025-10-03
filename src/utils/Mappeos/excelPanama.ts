@@ -307,30 +307,30 @@ export class ClassExcelPanama {
         if (tipoExcel === 'BEAUTY') {
             // --- Insertar datos de cabecera ---
             // Aplica estilos de borde aquí si también quieres los campos de cabecera con bordes
-            const clientCodeCell = worksheet.getCell('J1');
+            const clientCodeCell = worksheet.getCell('G1');
             clientCodeCell.value = `Cliente N°: ${dataToInsert.clientCode}`;
             clientCodeCell.border = boldBorderStyle; // Aplicar borde
     
-            const clientNameCell = worksheet.getCell('J3');
+            const clientNameCell = worksheet.getCell('G3');
             clientNameCell.value = `${dataToInsert.clientName}`;
             clientNameCell.border = {
                                 top: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }, // Negro
                                 left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }
                             };
     
-            const clientAddressCell = worksheet.getCell('J5');
+            const clientAddressCell = worksheet.getCell('G5');
             clientAddressCell.value = `${dataToInsert.clientAddress}`;
             clientAddressCell.border = {
                                     left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
                                 };
     
-            const clientNifCell = worksheet.getCell('J4');
+            const clientNifCell = worksheet.getCell('G4');
             clientNifCell.value = `${dataToInsert.clientNif}`;
             clientNifCell.border = {
                                     left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
                                 };
     
-            const clientPhoneCell = worksheet.getCell('J7');
+            const clientPhoneCell = worksheet.getCell('G7');
             clientPhoneCell.value = `Teléfono: ${dataToInsert.clientPhone}`;
             clientPhoneCell.border = {
                                 left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
@@ -354,7 +354,6 @@ export class ClassExcelPanama {
             const realRowsTotal = startRowForTotals + items.length
     
             let currentRowForNewItems = startRowForItems; // La fila donde se insertará el primer nuevo ítem
-            let subtotal = 0; // Si necesitas calcular un subtotal de los ítems insertados.
     
             // Itera sobre los ítems de la data
             items.forEach((item: any) => {
@@ -370,15 +369,15 @@ export class ClassExcelPanama {
                 cellB.border = boldBorderStyle;
     
                 const cellC = worksheet.getCell(`C${currentRowForNewItems}`);
-                cellC.value = item.LOTE;
+                cellC.value = item.NUM_LOTE;
                 cellC.border = boldBorderStyle;
     
                 const cellD = worksheet.getCell(`D${currentRowForNewItems}`);
-                cellD.value = item.MARCA;
+                cellD.value = item.FECHA_VENCIMIENTO;
                 cellD.border = boldBorderStyle;
     
                 const cellE = worksheet.getCell(`E${currentRowForNewItems}`);
-                cellE.value = item.DESCRIPCION_REG;
+                cellE.value = item.DESCRIPCION_GENERAL;
                 cellE.border = boldBorderStyle;
     
                 const cellF = worksheet.getCell(`F${currentRowForNewItems}`);
@@ -386,7 +385,7 @@ export class ClassExcelPanama {
                 cellF.border = boldBorderStyle;
     
                 const cellG = worksheet.getCell(`G${currentRowForNewItems}`);
-                cellG.value = item.DETALLE;
+                cellG.value = item.DETALLE_ADUANAL;
                 cellG.border = boldBorderStyle;
     
                 const cellH = worksheet.getCell(`H${currentRowForNewItems}`);
@@ -394,20 +393,24 @@ export class ClassExcelPanama {
                 cellH.border = boldBorderStyle;
     
                 const cellI = worksheet.getCell(`I${currentRowForNewItems}`);
-                cellI.value = item.ORIGEN;
+                cellI.value = item.MARCA;
                 cellI.border = boldBorderStyle;
     
                 const cellJ = worksheet.getCell(`J${currentRowForNewItems}`);
-                cellJ.value = item.CANTIDAD;
+                cellJ.value = item.ORIGEN;
                 cellJ.border = boldBorderStyle;
     
                 const cellK = worksheet.getCell(`K${currentRowForNewItems}`);
-                cellK.value = item.PRECIO;
+                cellK.value = item.CANTIDAD;
                 cellK.border = boldBorderStyle;
     
                 const cellL = worksheet.getCell(`L${currentRowForNewItems}`);
-                cellL.value = item.TOTAL;
+                cellL.value = item.PRECIO;
                 cellL.border = boldBorderStyle;
+
+                const cellM = worksheet.getCell(`M${currentRowForNewItems}`);
+                cellM.value = item.TOTAL;
+                cellM.border = boldBorderStyle;
     
                 currentRowForNewItems++; // Avanza a la siguiente fila para el próximo ítem
             });
@@ -424,25 +427,25 @@ export class ClassExcelPanama {
             totalCajas.value = dataToInsert.clientBulto;
             totalCajas.border = boldBorderStyle; // Aplicar borde
     
-            const formaPago = worksheet.getCell(`A${realRowsTotal + 3}`);
+            const formaPago = worksheet.getCell(`A${realRowsTotal + 5}`);
             formaPago.value = `Forma de Pago: ${dataToInsert.clientFormaPago}`;
     
-            const moneda = worksheet.getCell(`A${realRowsTotal + 4}`);
+            const moneda = worksheet.getCell(`A${realRowsTotal + 6}`);
             moneda.value = `Moneda de Negociación: ${dataToInsert.clientMoneda}`;
     
-            const despacho = worksheet.getCell(`A${realRowsTotal + 6}`);
+            const despacho = worksheet.getCell(`A${realRowsTotal + 8}`);
             despacho.value = `Via de Despacho: ${dataToInsert.clientDespacho}`;
     
-            const totalBrutoCell = worksheet.getCell(`L${realRowsTotal}`);
+            const totalBrutoCell = worksheet.getCell(`M${realRowsTotal}`);
             totalBrutoCell.value = dataToInsert.totalBruto;
             totalBrutoCell.border = boldBorderStyle; // Aplicar borde
     
-            const totalNetoCell = worksheet.getCell(`L${realRowsTotal + 2}`);
+            const totalNetoCell = worksheet.getCell(`M${realRowsTotal + 2}`);
             totalNetoCell.value = dataToInsert.totalNeto;
             totalNetoCell.border = boldBorderStyle; // Aplicar borde
     
             const lastRowBeauty = worksheet.lastRow.number;
-            worksheet.pageSetup.printArea = `A1:L${lastRowBeauty}`;
+            worksheet.pageSetup.printArea = `A1:M${lastRowBeauty}`;
             worksheet.views = [{ state: 'normal', showGridLines: true }];
     
             const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
@@ -454,30 +457,30 @@ export class ClassExcelPanama {
         } else if (tipoExcel === 'ACC') {
             // --- Insertar datos de cabecera ---
             // Aplica estilos de borde aquí si también quieres los campos de cabecera con bordes
-            const clientCodeCell = worksheet.getCell('H1');
+            const clientCodeCell = worksheet.getCell('G1');
             clientCodeCell.value = `Cliente N°: ${dataToInsert.clientCode}`;
             clientCodeCell.border = boldBorderStyle; // Aplicar borde
     
-            const clientNameCell = worksheet.getCell('H3');
+            const clientNameCell = worksheet.getCell('G3');
             clientNameCell.value = `${dataToInsert.clientName}`;
             clientNameCell.border = {
                                 top: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }, // Negro
                                 left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }
                             };
     
-            const clientAddressCell = worksheet.getCell('H5');
+            const clientAddressCell = worksheet.getCell('G5');
             clientAddressCell.value = `${dataToInsert.clientAddress}`;
             clientAddressCell.border = {
                                     left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
                                 }; 
     
-            const clientNifCell = worksheet.getCell('H4');
+            const clientNifCell = worksheet.getCell('G4');
             clientNifCell.value = `${dataToInsert.clientNif}`;
             clientNifCell.border = {
                                     left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
                                 };
     
-            const clientPhoneCell = worksheet.getCell('H7');
+            const clientPhoneCell = worksheet.getCell('G7');
             clientPhoneCell.value = `Teléfono: ${dataToInsert.clientPhone}`;
             clientPhoneCell.border = {
                                 left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
@@ -501,17 +504,13 @@ export class ClassExcelPanama {
             const realRowsTotal = startRowForTotals + items.length
     
             let currentRowForNewItems = startRowForItems; // La fila donde se insertará el primer nuevo ítem
-            let subtotal = 0; // Si necesitas calcular un subtotal de los ítems insertados.
     
             // Itera sobre los ítems de la data
             items.forEach((item: any) => {
-                // *** ESTO ES LO CLAVE: Insertar una nueva fila en la posición actual ***
-                // Esto empujará todas las filas (incluyendo los campos debajo de la tabla de ítems)
-                // hacia abajo para hacer espacio para el nuevo ítem.
+        
                 worksheet.insertRow(currentRowForNewItems, []);
     
-                // Asignar valores a las celdas de la nueva fila.
-                // Las columnas son A, B, C, D, E, F, G, H, I, J, K, L.
+                
                 const cellA = worksheet.getCell(`A${currentRowForNewItems}`);
                 cellA.value = item.CODIGO;
                 cellA.border = boldBorderStyle;
@@ -521,39 +520,33 @@ export class ClassExcelPanama {
                 cellB.border = boldBorderStyle;
     
                 const cellC = worksheet.getCell(`C${currentRowForNewItems}`);
-                cellC.value = item.DESCRIPCION;
+                cellC.value = item.DESCRIPCION_GENERAL;
                 cellC.border = boldBorderStyle;
     
                 const cellD = worksheet.getCell(`D${currentRowForNewItems}`);
-                cellD.value = item.CODBARRAS;
+                cellD.value = item.COMPOSICION;
                 cellD.border = boldBorderStyle;
     
                 const cellE = worksheet.getCell(`E${currentRowForNewItems}`);
-                cellE.value = item.DETALLE;
+                cellE.value = item.ORIGEN;
                 cellE.border = boldBorderStyle;
     
                 const cellF = worksheet.getCell(`F${currentRowForNewItems}`);
-                cellF.value = item.ORIGEN;
+                cellF.value = item.MARCA;
                 cellF.border = boldBorderStyle;
     
                 const cellG = worksheet.getCell(`G${currentRowForNewItems}`);
-                cellG.value = item.MARCA;
+                cellG.value = item.CANTIDAD;
                 cellG.border = boldBorderStyle;
     
                 const cellH = worksheet.getCell(`H${currentRowForNewItems}`);
-                cellH.value = item.CANTIDAD;
+                cellH.value = item.PRECIO;
                 cellH.border = boldBorderStyle;
     
                 const cellI = worksheet.getCell(`I${currentRowForNewItems}`);
-                cellI.value = item.PRECIO;
+                cellI.value = item.TOTAL;
                 cellI.border = boldBorderStyle;
     
-                const cellJ = worksheet.getCell(`J${currentRowForNewItems}`);
-                cellJ.value = item.TOTAL;
-                cellJ.border = boldBorderStyle;
-    
-                // Si necesitas calcular un subtotal de los ítems
-                // subtotal += item.TOTAL; // Si item.TOTAL es el total por línea
     
                 currentRowForNewItems++; // Avanza a la siguiente fila para el próximo ítem
             });
@@ -579,16 +572,16 @@ export class ClassExcelPanama {
             const despacho = worksheet.getCell(`A${realRowsTotal + 6}`);
             despacho.value = `Via de Despacho: ${dataToInsert.clientDespacho}`;
     
-            const totalBrutoCell = worksheet.getCell(`J${realRowsTotal}`);
+            const totalBrutoCell = worksheet.getCell(`I${realRowsTotal}`);
             totalBrutoCell.value = dataToInsert.totalBruto;
             totalBrutoCell.border = boldBorderStyle; // Aplicar borde
     
-            const totalNetoCell = worksheet.getCell(`J${realRowsTotal + 2}`);
+            const totalNetoCell = worksheet.getCell(`I${realRowsTotal + 2}`);
             totalNetoCell.value = dataToInsert.totalNeto;
             totalNetoCell.border = boldBorderStyle; // Aplicar borde
     
             const lastRowBeauty = worksheet.lastRow.number;
-            worksheet.pageSetup.printArea = `A1:J${lastRowBeauty}`;
+            worksheet.pageSetup.printArea = `A1:I${lastRowBeauty}`;
             worksheet.views = [{ state: 'normal', showGridLines: true }];
     
             const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
