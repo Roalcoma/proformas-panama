@@ -9,7 +9,7 @@ import { excelParaguay } from './Mappeos/excelParaguay';
 import { excelRD } from './Mappeos/excelRD';
 import { excelUruguay } from './Mappeos/excelUruguay';
 import { excelVenezuela } from './Mappeos/excelVenezuela';
-import { excelEcuador } from './Mappeos/excelEcuador';
+import { ClassExcelEcuador } from './Mappeos/excelEcuador';
 import { ClassExcelArgentina } from './Mappeos/excelArgentina';
 import { excelPeru } from './Mappeos/excelPeru';
 import { excelGuatemala } from './Mappeos/excelGuatemala';
@@ -99,7 +99,7 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
         }
     
         if (dataToInsert.invoicePais === 'EC') {
-            const newFilePath = await excelEcuador(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
+            const newFilePath = await ClassExcelEcuador.excelEcuador(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
             //console.log('Archivo generado en:', newFilePath);
             return newFilePath;
         }
@@ -157,6 +157,12 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
 
         if (dataToInsert.invoicePais === 'CR') {
             const newFilePath = await ClassExcelCostaRica.excelCostaRicaVSFA(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
+            //console.log('Archivo generado en:', newFilePath);
+            return newFilePath;
+        }
+
+        if (dataToInsert.invoicePais === 'EC') {
+            const newFilePath = await ClassExcelEcuador.excelEcuadorVSFA(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
             //console.log('Archivo generado en:', newFilePath);
             return newFilePath;
         }
