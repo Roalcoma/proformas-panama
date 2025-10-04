@@ -2,7 +2,7 @@ import ExcelJS from 'exceljs';
 
 export class ClassExcelColombia {
     
-    static async excelColombia(dataToInsert: any, items: any, tipoExcel: String, workbook: any, worksheet: any, boldBorderStyle: any, outputDir: any, path: any): Promise<string> {
+    static async excelColombia(dataToInsert: any, items: any, tipoExcel: string, workbook: any, worksheet: any, boldBorderStyle: any, outputDir: any, path: any): Promise<string> {
         let newFilePath: any = '';
     
         const clientCodeCell = worksheet.getCell('I1');
@@ -145,7 +145,7 @@ export class ClassExcelColombia {
         return newFilePath;
     }
 
-    static async excelColombiaVSFA(dataToInsert: any, items: any, tipoExcel: String, workbook: any, worksheet: any, boldBorderStyle: any, outputDir: any, path: any): Promise<string> {
+    static async excelColombiaVSFA(dataToInsert: any, items: any, tipoExcel: string, workbook: any, worksheet: any, boldBorderStyle: any, outputDir: any, path: any): Promise<string> {
         let newFilePath: any = '';
     
         const clientCodeCell = worksheet.getCell('I1');

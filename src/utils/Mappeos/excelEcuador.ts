@@ -2,7 +2,7 @@ import ExcelJS from 'exceljs';
 
 export class ClassExcelEcuador {
 
-    static async excelEcuador(dataToInsert: any, items: any, tipoExcel: String, workbook: any, worksheet: any, boldBorderStyle: any, outputDir: any, path: any): Promise<string> {
+    static async excelEcuador(dataToInsert: any, items: any, tipoExcel: string, workbook: any, worksheet: any, boldBorderStyle: any, outputDir: any, path: any): Promise<string> {
         let newFilePath: any = '';
     
         if (tipoExcel === 'BEAUTY') {
@@ -306,7 +306,7 @@ export class ClassExcelEcuador {
         return newFilePath;
     }
 
-    static async excelEcuadorVSFA(dataToInsert: any, items: any, tipoExcel: String, workbook: any, worksheet: any, boldBorderStyle: any, outputDir: any, path: any): Promise<string> {
+    static async excelEcuadorVSFA(dataToInsert: any, items: any, tipoExcel: string, workbook: any, worksheet: any, boldBorderStyle: any, outputDir: any, path: any): Promise<string> {
         let newFilePath: any = '';
     
         if (tipoExcel === 'BEAUTY') {

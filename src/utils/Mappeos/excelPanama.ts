@@ -55,8 +55,7 @@ export class ClassExcelPanama {
             const realRowsTotal = startRowForTotals + items.length
     
             let currentRowForNewItems = startRowForItems; // La fila donde se insertará el primer nuevo ítem
-            let subtotal = 0; // Si necesitas calcular un subtotal de los ítems insertados.
-    
+           
             // Itera sobre los ítems de la data
             items.forEach((item: any) => {
                 
@@ -202,7 +201,6 @@ export class ClassExcelPanama {
             const realRowsTotal = startRowForTotals + items.length
     
             let currentRowForNewItems = startRowForItems; // La fila donde se insertará el primer nuevo ítem
-            let subtotal = 0; // Si necesitas calcular un subtotal de los ítems insertados.
     
             // Itera sobre los ítems de la data
             items.forEach((item: any) => {

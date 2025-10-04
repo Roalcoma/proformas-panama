@@ -1,6 +1,6 @@
 import ExcelJS from 'exceljs';
 
-export async function excelPeru(dataToInsert: any, items: any, tipoExcel: String, workbook: any, worksheet: any, boldBorderStyle: any, outputDir: any, path: any): Promise<string> {
+export async function excelPeru(dataToInsert: any, items: any, tipoExcel: string, workbook: any, worksheet: any, boldBorderStyle: any, outputDir: any, path: any): Promise<string> {
     let newFilePath: any = '';
 
     if (tipoExcel === 'BEAUTY') {
@@ -53,8 +53,6 @@ export async function excelPeru(dataToInsert: any, items: any, tipoExcel: String
         const realRowsTotal = startRowForTotals + items.length
 
         let currentRowForNewItems = startRowForItems; // La fila donde se insertará el primer nuevo ítem
-        let subtotal = 0; // Si necesitas calcular un subtotal de los ítems insertados.
-
         // Itera sobre los ítems de la data
         items.forEach((item: any) => {
             
@@ -192,7 +190,6 @@ export async function excelPeru(dataToInsert: any, items: any, tipoExcel: String
         const realRowsTotal = startRowForTotals + items.length
 
         let currentRowForNewItems = startRowForItems; // La fila donde se insertará el primer nuevo ítem
-        let subtotal = 0; // Si necesitas calcular un subtotal de los ítems insertados.
 
         // Itera sobre los ítems de la data
         items.forEach((item: any) => {
