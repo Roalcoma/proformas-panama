@@ -6,7 +6,7 @@ import { ClassExcelColombia } from './Mappeos/excelColombia';
 import { ClassExcelEcuador } from './Mappeos/excelEcuador';
 import { ClassExcelArgentina } from './Mappeos/excelArgentina';
 import { ClassExcelSalvador } from './Mappeos/excelSalvador';
-import { excelCuracao } from './Mappeos/excelCuracao';
+import { ClassExcelCuracao } from './Mappeos/excelCuracao';
 import { excelParaguay } from './Mappeos/excelParaguay';
 import { excelRD } from './Mappeos/excelRD';
 import { excelUruguay } from './Mappeos/excelUruguay';
@@ -81,7 +81,7 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
         }
     
         if (dataToInsert.invoicePais === 'CW') {
-            const newFilePath = await excelCuracao(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
+            const newFilePath = await ClassExcelCuracao.excelCuracao(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
             //console.log('Archivo generado en:', newFilePath);
             return newFilePath;
         }
