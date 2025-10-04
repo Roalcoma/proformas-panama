@@ -1,16 +1,16 @@
 import ExcelJS from 'exceljs';
 import path from "path";
 import { ClassExcelPanama } from './Mappeos/excelPanama';
-import { excelSalvador } from './Mappeos/excelSalvador';
-import { ClassExcelColombia } from './Mappeos/excelColombia';
-import { excelCuracao } from './Mappeos/excelCuracao';
 import { ClassExcelCostaRica } from './Mappeos/excelCostaRica';
+import { ClassExcelColombia } from './Mappeos/excelColombia';
+import { ClassExcelEcuador } from './Mappeos/excelEcuador';
+import { ClassExcelArgentina } from './Mappeos/excelArgentina';
+import { ClassExcelSalvador } from './Mappeos/excelSalvador';
+import { excelCuracao } from './Mappeos/excelCuracao';
 import { excelParaguay } from './Mappeos/excelParaguay';
 import { excelRD } from './Mappeos/excelRD';
 import { excelUruguay } from './Mappeos/excelUruguay';
 import { excelVenezuela } from './Mappeos/excelVenezuela';
-import { ClassExcelEcuador } from './Mappeos/excelEcuador';
-import { ClassExcelArgentina } from './Mappeos/excelArgentina';
 import { excelPeru } from './Mappeos/excelPeru';
 import { excelGuatemala } from './Mappeos/excelGuatemala';
 
@@ -63,7 +63,7 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
         }
     
         if (dataToInsert.invoicePais === 'SV') {
-            const newFilePath = await excelSalvador(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
+            const newFilePath = await ClassExcelSalvador.excelSalvador(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
             //console.log('Archivo generado en:', newFilePath);
             return newFilePath;
         }
@@ -163,6 +163,12 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
 
         if (dataToInsert.invoicePais === 'EC') {
             const newFilePath = await ClassExcelEcuador.excelEcuadorVSFA(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
+            //console.log('Archivo generado en:', newFilePath);
+            return newFilePath;
+        }
+
+        if (dataToInsert.invoicePais === 'SV') {
+            const newFilePath = await ClassExcelSalvador.excelSalvadorVSFA(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
             //console.log('Archivo generado en:', newFilePath);
             return newFilePath;
         }
