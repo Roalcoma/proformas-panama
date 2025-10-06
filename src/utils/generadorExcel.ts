@@ -11,8 +11,8 @@ import { ClassExcelParaguay } from './Mappeos/excelParaguay';
 import { ClassExcelUruguay } from './Mappeos/excelUruguay';
 import { ClassExcelVenezuela } from './Mappeos/excelVenezuela';
 import { ClassExcelPeru } from './Mappeos/excelPeru';
+import { ClassExcelGuatemala } from './Mappeos/excelGuatemala';
 import { excelRD } from './Mappeos/excelRD';
-import { excelGuatemala } from './Mappeos/excelGuatemala';
 
 // Ruta al directorio de plantillas
 const templatesDir = path.join(__dirname, '..', 'templates');
@@ -75,7 +75,7 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
         }
     
         if (dataToInsert.invoicePais === 'GT') {
-            const newFilePath = await excelGuatemala(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
+            const newFilePath = await ClassExcelGuatemala.excelGuatemala(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
             //console.log('Archivo generado en:', newFilePath);
             return newFilePath;
         }
@@ -100,12 +100,6 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
     
         if (dataToInsert.invoicePais === 'EC') {
             const newFilePath = await ClassExcelEcuador.excelEcuador(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
-            //console.log('Archivo generado en:', newFilePath);
-            return newFilePath;
-        }
-    
-        if (dataToInsert.invoicePais === 'GT') {
-            const newFilePath = await excelGuatemala(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
             //console.log('Archivo generado en:', newFilePath);
             return newFilePath;
         }
@@ -193,6 +187,12 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
 
         if (dataToInsert.invoicePais === 'PE') {
             const newFilePath = await ClassExcelPeru.excelPeruVSFA(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
+            //console.log('Archivo generado en:', newFilePath);
+            return newFilePath;
+        }
+
+        if (dataToInsert.invoicePais === 'GT') {
+            const newFilePath = await ClassExcelGuatemala.excelGuatemalaVSFA(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
             //console.log('Archivo generado en:', newFilePath);
             return newFilePath;
         }
