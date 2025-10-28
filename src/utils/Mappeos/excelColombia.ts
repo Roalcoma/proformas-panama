@@ -151,7 +151,7 @@ export class ClassExcelColombia {
         if (tipoExcel === 'BEAUTY') {
             
             const clientCodeCell = worksheet.getCell('J7');
-            clientCodeCell.value = `Cliente N°: ${dataToInsert.clientCode}`;
+            clientCodeCell.value = `${dataToInsert.clientCode}`;
             //clientCodeCell.border = boldBorderStyle; // Aplicar borde
         
             const clientNameCell = worksheet.getCell('A11');
