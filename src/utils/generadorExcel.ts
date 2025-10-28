@@ -32,7 +32,17 @@ const boldBorderStyle = {
 export async function generateExcel(sampleData: any, tipoExcel: string, marca: string): Promise<any> {
     const dataToInsert = sampleData;
 
-    const templatePath = path.join(templatesDir, `${marca}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`);
+    let templatePath: string = '';
+
+    if(marca === 'BBW') {
+        templatePath = path.join(templatesDir, `${dataToInsert.invoicePais}_${tipoExcel}.xlsx`);
+    } else {
+        if(tipoExcel === 'BEAUTY') {
+            templatePath = path.join(templatesDir, `${marca}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`);
+        } else {
+            templatePath = path.join(templatesDir, `${marca}_${tipoExcel}.xlsx`);
+        }
+    }
 
     console.log('Estoy en generador excel')
 
@@ -193,6 +203,11 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
 
         if (dataToInsert.invoicePais === 'GT') {
             const newFilePath = await ClassExcelGuatemala.excelGuatemalaVSFA(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
+            //console.log('Archivo generado en:', newFilePath);
+            return newFilePath;
+        }
+        if (dataToInsert.invoicePais === 'AR') {
+            const newFilePath = await ClassExcelArgentina.excelArgentinaVSFA(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
             //console.log('Archivo generado en:', newFilePath);
             return newFilePath;
         }

@@ -10,41 +10,30 @@ export class ClassExcelUruguay {
             // Aplica estilos de borde aquí si también quieres los campos de cabecera con bordes
             const clientCodeCell = worksheet.getCell('I1');
             clientCodeCell.value = `Cliente N°: ${dataToInsert.clientCode}`;
-            clientCodeCell.border = boldBorderStyle; // Aplicar borde
+            
     
             const clientNameCell = worksheet.getCell('I3');
             clientNameCell.value = `${dataToInsert.clientName}`;
-            clientNameCell.border = {
-                                top: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }, // Negro
-                                left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }
-                            };
+            
     
             const clientAddressCell = worksheet.getCell('I5');
             clientAddressCell.value = `${dataToInsert.clientAddress}`;
-            clientAddressCell.border = {
-                                    left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
-                                };
+            
     
             const clientNifCell = worksheet.getCell('I4');
             clientNifCell.value = `${dataToInsert.clientNif}`;
-            clientNifCell.border = {
-                                    left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
-                                };
+            
     
             const clientPhoneCell = worksheet.getCell('I7');
             clientPhoneCell.value = `Teléfono: ${dataToInsert.clientPhone}`;
-            clientPhoneCell.border = {
-                                left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
-                                bottom: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }
-                            };  
+            
     
             const invoiceDateCell = worksheet.getCell('A9');
             invoiceDateCell.value = dataToInsert.invoiceDate;
-            invoiceDateCell.border = boldBorderStyle; // Aplicar borde
+            
     
             const invoiceNumberCell = worksheet.getCell('B9');
             invoiceNumberCell.value = dataToInsert.invoiceNumber;
-            invoiceNumberCell.border = boldBorderStyle; // Aplicar borde
     
             // --- Lógica para INSERTAR nuevos ítems sin eliminar filas ---
     
@@ -110,15 +99,12 @@ export class ClassExcelUruguay {
     
             const totalUnidadesCell = worksheet.getCell(`C${realRowsTotal}`);
             totalUnidadesCell.value = dataToInsert.totalUnidades;
-            totalUnidadesCell.border = boldBorderStyle; // Aplicar borde
     
             const pesoBruto = worksheet.getCell(`C${realRowsTotal + 2}`);
             pesoBruto.value = dataToInsert.clientPeso;
-            pesoBruto.border = boldBorderStyle; // Aplicar borde
     
             const totalCajas = worksheet.getCell(`C${realRowsTotal + 1}`);
             totalCajas.value = dataToInsert.clientBulto;
-            totalCajas.border = boldBorderStyle; // Aplicar borde
     
             const formaPago = worksheet.getCell(`A${realRowsTotal + 4}`);
             formaPago.value = `Forma de Pago: ${dataToInsert.clientFormaPago}`;
@@ -131,11 +117,9 @@ export class ClassExcelUruguay {
     
             const totalBrutoCell = worksheet.getCell(`K${realRowsTotal}`);
             totalBrutoCell.value = dataToInsert.totalBruto;
-            totalBrutoCell.border = boldBorderStyle; // Aplicar borde
     
             const totalNetoCell = worksheet.getCell(`K${realRowsTotal + 2}`);
             totalNetoCell.value = dataToInsert.totalNeto;
-            totalNetoCell.border = boldBorderStyle; // Aplicar borde
     
             const lastRowBeauty = worksheet.lastRow.number;
             worksheet.pageSetup.printArea = `A1:K${lastRowBeauty}`;

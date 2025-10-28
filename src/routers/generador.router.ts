@@ -1,7 +1,6 @@
 import express from "express";
 import { GeneradorController } from "../controllers/generador.controller";
 
-
 export const generadorRouter = express.Router();
 
 generadorRouter.get("/process-template", GeneradorController.processTemplate);
