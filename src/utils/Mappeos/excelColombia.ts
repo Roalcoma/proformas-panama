@@ -147,141 +147,271 @@ export class ClassExcelColombia {
 
     static async excelColombiaVSFA(dataToInsert: any, items: any, tipoExcel: string, workbook: any, worksheet: any, boldBorderStyle: any, outputDir: any, path: any): Promise<string> {
         let newFilePath: any = '';
-    
-        const clientCodeCell = worksheet.getCell('I1');
-        clientCodeCell.value = `Cliente N°: ${dataToInsert.clientCode}`;
-        clientCodeCell.border = boldBorderStyle; // Aplicar borde
-    
-        const clientNameCell = worksheet.getCell('I3');
-        clientNameCell.value = `${dataToInsert.clientName}`;
-        clientNameCell.border = {
-                            top: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }, // Negro
-                            left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }
-                        };
-    
-        const clientAddressCell = worksheet.getCell('I5');
-        clientAddressCell.value = `${dataToInsert.clientAddress}`;
-        clientAddressCell.border = {
-                                left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
-                            };
-    
-        const clientNifCell = worksheet.getCell('I4');
-        clientNifCell.value = `${dataToInsert.clientNif}`;
-        clientNifCell.border = {
-                                left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
-                            };
-    
-        const clientPhoneCell = worksheet.getCell('I7');
-        clientPhoneCell.value = `Teléfono: ${dataToInsert.clientPhone}`;
-        clientPhoneCell.border = {
-                            left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
-                            bottom: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }
-                        };  
-    
-        const invoiceDateCell = worksheet.getCell('A9');
-        invoiceDateCell.value = dataToInsert.invoiceDate;
-        invoiceDateCell.border = boldBorderStyle; // Aplicar borde
-    
-        const invoiceNumberCell = worksheet.getCell('B9');
-        invoiceNumberCell.value = dataToInsert.invoiceNumber;
-        invoiceNumberCell.border = boldBorderStyle; // Aplicar borde
-    
-        // --- Lógica para INSERTAR nuevos ítems sin eliminar filas ---
-    
-        const startRowForItems = 12; // La fila donde se empezará a insertar los ítems.
-                                // Todas las filas desde aquí hacia abajo se desplazarán.
-        const startRowForTotals = 13; // Fila donde empiezan los totales.
-    
-        const realRowsTotal = startRowForTotals + items.length
-    
-        let currentRowForNewItems = startRowForItems; // La fila donde se insertará el primer nuevo ítem
-    
-        // Itera sobre los ítems de la data
-        items.forEach((item: any) => {
+        
+        if (tipoExcel === 'BEAUTY') {
             
-            worksheet.insertRow(currentRowForNewItems, []);
+            const clientCodeCell = worksheet.getCell('J7');
+            clientCodeCell.value = `Cliente N°: ${dataToInsert.clientCode}`;
+            //clientCodeCell.border = boldBorderStyle; // Aplicar borde
+        
+            const clientNameCell = worksheet.getCell('A11');
+            clientNameCell.value = `${dataToInsert.clientName}`;
+                
+        
+            const clientAddressCell = worksheet.getCell('A12');
+            clientAddressCell.value = `${dataToInsert.clientAddress}`;
+            
     
-            const cellA = worksheet.getCell(`A${currentRowForNewItems}`);
-            cellA.value = item.REFERENCIA;
-            cellA.border = boldBorderStyle;
+            const clientNifCell = worksheet.getCell('A13');
+            clientNifCell.value = `${dataToInsert.clientNif}`;
+            
     
-            const cellB = worksheet.getCell(`B${currentRowForNewItems}`);
-            cellB.value = item.CODIGO;
-            cellB.border = boldBorderStyle;
+            const clientPhoneCell = worksheet.getCell('A14');
+            clientPhoneCell.value = `Teléfono: ${dataToInsert.clientPhone}`;
+        
+            const invoiceDateCell = worksheet.getCell('J3');
+            invoiceDateCell.value = dataToInsert.invoiceDate;
+            invoiceDateCell.border = boldBorderStyle; // Aplicar borde
+        
+            const invoiceNumberCell = worksheet.getCell('J5');
+            invoiceNumberCell.value = dataToInsert.invoiceNumber;
+            invoiceNumberCell.border = boldBorderStyle; // Aplicar borde
+        
+            // --- Lógica para INSERTAR nuevos ítems sin eliminar filas ---
+        
+            const startRowForItems = 17; // La fila donde se empezará a insertar los ítems.
+                                    // Todas las filas desde aquí hacia abajo se desplazarán.
+            const startRowForTotals = 18; // Fila donde empiezan los totales.
+        
+            const realRowsTotal = startRowForTotals + items.length
+        
+            let currentRowForNewItems = startRowForItems; // La fila donde se insertará el primer nuevo ítem
+        
+            // Itera sobre los ítems de la data
+            items.forEach((item: any) => {
+                
+                worksheet.insertRow(currentRowForNewItems, []);
+        
+                const cellA = worksheet.getCell(`A${currentRowForNewItems}`);
+                cellA.value = item.REFERENCIA;
+                cellA.border = boldBorderStyle;
+        
+                const cellB = worksheet.getCell(`B${currentRowForNewItems}`);
+                cellB.value = item.CODIGO;
+                cellB.border = boldBorderStyle;
+        
+                const cellC = worksheet.getCell(`C${currentRowForNewItems}`);
+                cellC.value = item.CONTENIDO;
+                cellC.border = boldBorderStyle;
+        
+                const cellD = worksheet.getCell(`D${currentRowForNewItems}`);
+                cellD.value = item.DETALLE_ADUANAL;
+                cellD.border = boldBorderStyle;
+        
+                const cellE = worksheet.getCell(`E${currentRowForNewItems}`);
+                cellE.value = item.COMPOSICION;
+                cellE.border = boldBorderStyle;
+        
+                const cellF = worksheet.getCell(`F${currentRowForNewItems}`);
+                cellF.value = item.ORIGEN;
+                cellF.border = boldBorderStyle;
+        
+                const cellG = worksheet.getCell(`G${currentRowForNewItems}`);
+                cellG.value = item.MARCA;
+                cellG.border = boldBorderStyle;
+        
+                const cellH = worksheet.getCell(`H${currentRowForNewItems}`);
+                cellH.value = item.CANTIDAD;
+                cellH.border = boldBorderStyle;
+        
+                const cellI = worksheet.getCell(`I${currentRowForNewItems}`);
+                cellI.value = item.PRECIO;
+                cellI.border = boldBorderStyle;
+        
+                const cellJ = worksheet.getCell(`J${currentRowForNewItems}`);
+                cellJ.value = item.TOTAL;
+                cellJ.border = boldBorderStyle;
+        
+                currentRowForNewItems++; // Avanza a la siguiente fila para el próximo ítem
+            });
+        
+            const totalUnidadesCell = worksheet.getCell(`D${realRowsTotal}`);
+            totalUnidadesCell.value = dataToInsert.totalUnidades;
+            //totalUnidadesCell.border = boldBorderStyle; // Aplicar borde
+        
+            const pesoBruto = worksheet.getCell(`D${realRowsTotal + 2}`);
+            pesoBruto.value = dataToInsert.clientPeso;
+            //pesoBruto.border = boldBorderStyle; // Aplicar borde
+        
+            const totalCajas = worksheet.getCell(`D${realRowsTotal + 1}`);
+            totalCajas.value = dataToInsert.clientBulto;
+            //totalCajas.border = boldBorderStyle; // Aplicar borde
+        
+            const formaPago = worksheet.getCell(`A${realRowsTotal + 6}`);
+            formaPago.value = `Forma de Pago: ${dataToInsert.clientFormaPago}`;
+        
+            const moneda = worksheet.getCell(`A${realRowsTotal + 7}`);
+            moneda.value = `Moneda de Negociación: ${dataToInsert.clientMoneda}`;
+        
+            const despacho = worksheet.getCell(`A${realRowsTotal + 9}`);
+            despacho.value = `Via de Despacho: ${dataToInsert.clientDespacho}`;
+        
+            const totalBrutoCell = worksheet.getCell(`J${realRowsTotal}`);
+            totalBrutoCell.value = dataToInsert.totalBruto;
+            //totalBrutoCell.border = boldBorderStyle; // Aplicar borde
+        
+            const totalNetoCell = worksheet.getCell(`J${realRowsTotal + 3}`);
+            totalNetoCell.value = dataToInsert.totalNeto;
+            //totalNetoCell.border = boldBorderStyle; // Aplicar borde
+        
+            const lastRowBeauty = worksheet.lastRow.number;
+            worksheet.pageSetup.printArea = `A1:J${lastRowBeauty}`;
+            worksheet.views = [{ state: 'normal', showGridLines: true }];
+        
+            const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
+            newFilePath = path.join(outputDir, newFileName);
+        
+            await workbook.xlsx.writeFile(newFilePath);
+        
+        } else if (tipoExcel === 'ACC') {
+            // --- Insertar datos de cabecera ---
+            // Aplica estilos de borde aquí si también quieres los campos de cabecera con bordes
+            const clientCodeCell = worksheet.getCell('H1');
+            clientCodeCell.value = `Cliente N°: ${dataToInsert.clientCode}`;
+            clientCodeCell.border = boldBorderStyle; // Aplicar borde
     
-            const cellC = worksheet.getCell(`C${currentRowForNewItems}`);
-            cellC.value = item.CONTENIDO;
-            cellC.border = boldBorderStyle;
+            const clientNameCell = worksheet.getCell('H3');
+            clientNameCell.value = `${dataToInsert.clientName}`;
+            clientNameCell.border = {
+                                top: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }, // Negro
+                                left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }
+                            };
     
-            const cellD = worksheet.getCell(`D${currentRowForNewItems}`);
-            cellD.value = item.DETALLE_ADUANAL;
-            cellD.border = boldBorderStyle;
+            const clientAddressCell = worksheet.getCell('H5');
+            clientAddressCell.value = `${dataToInsert.clientAddress}`;
+            clientAddressCell.border = {
+                                    left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
+                                }; 
     
-            const cellE = worksheet.getCell(`E${currentRowForNewItems}`);
-            cellE.value = item.COMPOSICION;
-            cellE.border = boldBorderStyle;
+            const clientNifCell = worksheet.getCell('H4');
+            clientNifCell.value = `${dataToInsert.clientNif}`;
+            clientNifCell.border = {
+                                    left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
+                                };
     
-            const cellF = worksheet.getCell(`F${currentRowForNewItems}`);
-            cellF.value = item.ORIGEN;
-            cellF.border = boldBorderStyle;
+            const clientPhoneCell = worksheet.getCell('H7');
+            clientPhoneCell.value = `Teléfono: ${dataToInsert.clientPhone}`;
+            clientPhoneCell.border = {
+                                left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
+                                bottom: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }
+                            };  
     
-            const cellG = worksheet.getCell(`G${currentRowForNewItems}`);
-            cellG.value = item.MARCA;
-            cellG.border = boldBorderStyle;
+            const invoiceDateCell = worksheet.getCell('A9');
+            invoiceDateCell.value = dataToInsert.invoiceDate;
+            invoiceDateCell.border = boldBorderStyle; // Aplicar borde
     
-            const cellH = worksheet.getCell(`H${currentRowForNewItems}`);
-            cellH.value = item.CANTIDAD;
-            cellH.border = boldBorderStyle;
+            const invoiceNumberCell = worksheet.getCell('B9');
+            invoiceNumberCell.value = dataToInsert.invoiceNumber;
+            invoiceNumberCell.border = boldBorderStyle; // Aplicar borde
     
-            const cellI = worksheet.getCell(`I${currentRowForNewItems}`);
-            cellI.value = item.PRECIO;
-            cellI.border = boldBorderStyle;
+            // --- Lógica para INSERTAR nuevos ítems sin eliminar filas ---
     
-            const cellJ = worksheet.getCell(`J${currentRowForNewItems}`);
-            cellJ.value = item.TOTAL;
-            cellJ.border = boldBorderStyle;
+            const startRowForItems = 12; // La fila donde se empezará a insertar los ítems.
+                                    // Todas las filas desde aquí hacia abajo se desplazarán.
+            const startRowForTotals = 13; // Fila donde empiezan los totales.
     
-            currentRowForNewItems++; // Avanza a la siguiente fila para el próximo ítem
-        });
+            const realRowsTotal = startRowForTotals + items.length
     
-        const totalUnidadesCell = worksheet.getCell(`C${realRowsTotal}`);
-        totalUnidadesCell.value = dataToInsert.totalUnidades;
-        totalUnidadesCell.border = boldBorderStyle; // Aplicar borde
+            let currentRowForNewItems = startRowForItems; // La fila donde se insertará el primer nuevo ítem
     
-        const pesoBruto = worksheet.getCell(`C${realRowsTotal + 1}`);
-        pesoBruto.value = dataToInsert.clientPeso;
-        pesoBruto.border = boldBorderStyle; // Aplicar borde
+            // Itera sobre los ítems de la data
+            items.forEach((item: any) => {
+                
+                worksheet.insertRow(currentRowForNewItems, []);
     
-        const totalCajas = worksheet.getCell(`C${realRowsTotal + 2}`);
-        totalCajas.value = dataToInsert.clientBulto;
-        totalCajas.border = boldBorderStyle; // Aplicar borde
+                
+                const cellA = worksheet.getCell(`A${currentRowForNewItems}`);
+                cellA.value = item.REFERENCIA;
+                cellA.border = boldBorderStyle;
     
-        const formaPago = worksheet.getCell(`A${realRowsTotal + 4}`);
-        formaPago.value = `Forma de Pago: ${dataToInsert.clientFormaPago}`;
+                const cellB = worksheet.getCell(`B${currentRowForNewItems}`);
+                cellB.value = item.CODIGO;
+                cellB.border = boldBorderStyle;
     
-        const moneda = worksheet.getCell(`A${realRowsTotal + 5}`);
-        moneda.value = `Moneda de Negociación: ${dataToInsert.clientMoneda}`;
+                const cellC = worksheet.getCell(`C${currentRowForNewItems}`);
+                cellC.value = item.CONTENIDO;
+                cellC.border = boldBorderStyle;
     
-        const despacho = worksheet.getCell(`A${realRowsTotal + 7}`);
-        despacho.value = `Via de Despacho: ${dataToInsert.clientDespacho}`;
+                const cellD = worksheet.getCell(`D${currentRowForNewItems}`);
+                cellD.value = item.DESCRIPCION_GENERAL;
+                cellD.border = boldBorderStyle;
     
-        const totalBrutoCell = worksheet.getCell(`J${realRowsTotal}`);
-        totalBrutoCell.value = dataToInsert.totalBruto;
-        totalBrutoCell.border = boldBorderStyle; // Aplicar borde
+                const cellE = worksheet.getCell(`E${currentRowForNewItems}`);
+                cellE.value = item.COMPOSICION;
+                cellE.border = boldBorderStyle;
     
-        const totalNetoCell = worksheet.getCell(`J${realRowsTotal + 2}`);
-        totalNetoCell.value = dataToInsert.totalNeto;
-        totalNetoCell.border = boldBorderStyle; // Aplicar borde
+                const cellF = worksheet.getCell(`F${currentRowForNewItems}`);
+                cellF.value = item.ORIGEN;
+                cellF.border = boldBorderStyle;
     
-        const lastRowBeauty = worksheet.lastRow.number;
-        worksheet.pageSetup.printArea = `A1:J${lastRowBeauty}`;
-        worksheet.views = [{ state: 'normal', showGridLines: true }];
+                const cellG = worksheet.getCell(`G${currentRowForNewItems}`);
+                cellG.value = item.MARCA;
+                cellG.border = boldBorderStyle;
     
-        const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
-        newFilePath = path.join(outputDir, newFileName);
+                const cellH = worksheet.getCell(`H${currentRowForNewItems}`);
+                cellH.value = item.CANTIDAD;
+                cellH.border = boldBorderStyle;
     
-        await workbook.xlsx.writeFile(newFilePath);
+                const cellI = worksheet.getCell(`I${currentRowForNewItems}`);
+                cellI.value = item.PRECIO;
+                cellI.border = boldBorderStyle;
     
+                const cellJ = worksheet.getCell(`J${currentRowForNewItems}`);
+                cellJ.value = item.TOTAL;
+                cellJ.border = boldBorderStyle;
+    
+                currentRowForNewItems++; // Avanza a la siguiente fila para el próximo ítem
+            });
+    
+            const totalUnidadesCell = worksheet.getCell(`B${realRowsTotal}`);
+            totalUnidadesCell.value = dataToInsert.totalUnidades;
+            //totalUnidadesCell.border = boldBorderStyle; // Aplicar borde
+    
+            const pesoBruto = worksheet.getCell(`B${realRowsTotal + 2}`);
+            pesoBruto.value = dataToInsert.clientPeso;
+            //pesoBruto.border = boldBorderStyle; // Aplicar borde
+    
+            const totalCajas = worksheet.getCell(`B${realRowsTotal + 1}`);
+            totalCajas.value = dataToInsert.clientBulto;
+            //totalCajas.border = boldBorderStyle; // Aplicar borde
+    
+            const formaPago = worksheet.getCell(`A${realRowsTotal + 4}`);
+            formaPago.value = `Forma de Pago: ${dataToInsert.clientFormaPago}`;
+    
+            const moneda = worksheet.getCell(`A${realRowsTotal + 5}`);
+            moneda.value = `Moneda de Negociación: ${dataToInsert.clientMoneda}`;
+    
+            const despacho = worksheet.getCell(`A${realRowsTotal + 7}`);
+            despacho.value = `Via de Despacho: ${dataToInsert.clientDespacho}`;
+    
+            const totalBrutoCell = worksheet.getCell(`J${realRowsTotal}`);
+            totalBrutoCell.value = dataToInsert.totalBruto;
+            //totalBrutoCell.border = boldBorderStyle; // Aplicar borde
+    
+            const totalNetoCell = worksheet.getCell(`J${realRowsTotal + 2}`);
+            totalNetoCell.value = dataToInsert.totalNeto;
+            //totalNetoCell.border = boldBorderStyle; // Aplicar borde
+    
+            const lastRowBeauty = worksheet.lastRow.number;
+            worksheet.pageSetup.printArea = `A1:J${lastRowBeauty}`;
+            worksheet.views = [{ state: 'normal', showGridLines: true }];
+    
+            const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
+            newFilePath = path.join(outputDir, newFileName);
+    
+            await workbook.xlsx.writeFile(newFilePath);
+        }
+
             
        
     
