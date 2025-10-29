@@ -446,7 +446,7 @@ export class ClassExcelPanama {
             // Aplica estilos de borde aquí si también quieres los campos de cabecera con bordes
             const clientCodeCell = worksheet.getCell('H1');
             clientCodeCell.value = `Cliente N°: ${dataToInsert.clientCode}`;
-            clientCodeCell.border = boldBorderStyle; // Aplicar borde
+            clientCodeCell.border = boldBorderStyle; 
     
             const clientNameCell = worksheet.getCell('H3');
             clientNameCell.value = `${dataToInsert.clientName}`;
