@@ -580,11 +580,11 @@ export const querys = {
             C.DIRECCION1,
             C.NIF20,
             ISNULL(C.TELEFONO1, '') AS TELEFONO, -- AS para alias
-            FORMAT(FV.FECHA, 'd', 'es-PA') AS FECHA, -- AS para alias
+            FORMAT(FV.FECHA, 'dd/MM/yyyy') AS FECHA, -- AS para alias
             FV.NUMSERIE AS NUMSERIE,
             FV.NUMFACTURA AS NUMFAC, -- AS para alias
-            --ISNULL(FVCL.NCAJAS, 0) AS NCAJAS, -- AS para alias
-            --ISNULL(FVCL.PNETO, 0) AS PNETO, -- AS para alias
+            ISNULL(FVCL.NCAJAS, 0) AS TOTALCAJABULTO, -- AS para alias
+            ISNULL(FVCL.PNETO, 0) AS PESONETO, -- AS para alias
             FVCL.VIADESPACHO,
             M.CODIGOISO AS MONEDA, -- AS para alias
             FV.TOTALBRUTO,
@@ -635,12 +635,12 @@ export const querys = {
             C.DIRECCION1,
             C.NIF20,
             ISNULL(C.TELEFONO1, '') AS TELEFONO, -- AS para alias
-            FORMAT(FV.FECHA, 'd', 'es-PA') AS FECHA, -- AS para alias
+            FORMAT(FV.FECHA, 'dd/MM/yyyy') AS FECHA, -- AS para alias
             FV.NUMSERIE AS NUMSERIE,
             FV.NUMFACTURA AS NUMFAC, -- AS para alias
-            --ISNULL(FVCL.NCAJAS, 0) AS NCAJAS, -- AS para alias
-            --ISNULL(FVCL.PNETO, 0) AS PNETO, -- AS para alias
-            --FVCL.VIADESPACHO,
+            ISNULL(FVCL.N_CAJAS, 0) AS TOTALCAJABULTO, -- AS para alias
+            ISNULL(FVCL.P_NETO, 0) AS PESONETO, -- AS para alias
+            FVCL.VIA_DESPACHO VIADESPACHO,
             M.CODIGOISO AS MONEDA, -- AS para alias
             FV.TOTALBRUTO,
             FV.TOTDTOCOMERCIAL,

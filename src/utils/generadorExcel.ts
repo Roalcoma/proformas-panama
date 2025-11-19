@@ -38,9 +38,9 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
         templatePath = path.join(templatesDir, `${dataToInsert.invoicePais}_${tipoExcel}.xlsx`);
     } else {
         if(tipoExcel === 'BEAUTY') {
-            templatePath = path.join(templatesDir, `${marca}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`);
+            templatePath = path.join(templatesDir, `VSFA_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`);
         } else {
-            templatePath = path.join(templatesDir, `${marca}_${tipoExcel}.xlsx`);
+            templatePath = path.join(templatesDir, `VSFA_${tipoExcel}.xlsx`);
         }
     }
 
@@ -145,7 +145,7 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
             return newFilePath;
         }
         
-    } else if (marca === 'VSFA') {
+    } else if (marca === 'VSFA' || marca === 'VSBA') {
         console.log('Estoy en VSFA')
         if (dataToInsert.invoicePais === 'PA') {
             const newFilePath = await ClassExcelPanama.excelPanamaVSFA(dataToInsert, items, tipoExcel, workbook, worksheet, boldBorderStyle, outputDir, path);
@@ -216,8 +216,6 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
             //console.log('Archivo generado en:', newFilePath);
             return newFilePath;
         }
-    } else if (marca === 'VSBA') {
-        console.log('Estoy en VSBA')
-    }
+    } 
 
 }
