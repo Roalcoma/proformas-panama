@@ -385,7 +385,7 @@ export class ClassExcelCostaRica {
             totalCajas.value = dataToInsert.clientBulto;
 
             const formaPago = worksheet.getCell(`A${realRowsTotal + 6}`);
-            formaPago.value = `Forma de Pago: ${dataToInsert.clientFormaPago}`;
+            formaPago.value = `Forma de Pago: A convenir`;
 
             const moneda = worksheet.getCell(`A${realRowsTotal + 7}`);
             moneda.value = `Moneda de Negociación: ${dataToInsert.clientMoneda}`;
