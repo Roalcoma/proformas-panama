@@ -201,15 +201,15 @@ export class ClassExcelColombia {
                 cellB.border = boldBorderStyle;
         
                 const cellC = worksheet.getCell(`C${currentRowForNewItems}`);
-                cellC.value = item.CONTENIDO;
+                cellC.value = item.DESCRIPCION_GENERAL;
                 cellC.border = boldBorderStyle;
-        
+
                 const cellD = worksheet.getCell(`D${currentRowForNewItems}`);
-                cellD.value = item.DETALLE_ADUANAL;
+                cellD.value = item.COMPOSICION;
                 cellD.border = boldBorderStyle;
-        
+
                 const cellE = worksheet.getCell(`E${currentRowForNewItems}`);
-                cellE.value = item.COMPOSICION;
+                cellE.value = item.DETALLE_ADUANAL;
                 cellE.border = boldBorderStyle;
         
                 const cellF = worksheet.getCell(`F${currentRowForNewItems}`);

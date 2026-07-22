@@ -334,27 +334,27 @@ export class ClassExcelSalvador {
                 worksheet.insertRow(currentRowForNewItems, []);
     
                 const cellA = worksheet.getCell(`A${currentRowForNewItems}`);
-                cellA.value = item.CODIGO;
+                cellA.value = item.REFERENCIA;
                 cellA.border = boldBorderStyle;
-    
+
                 const cellB = worksheet.getCell(`B${currentRowForNewItems}`);
-                cellB.value = item.PRODUCTO;
+                cellB.value = item.CODIGO;
                 cellB.border = boldBorderStyle;
-    
+
                 const cellC = worksheet.getCell(`C${currentRowForNewItems}`);
-                cellC.value = item.FRAGANCIA;
+                cellC.value = item.ESENCIA_REG;
                 cellC.border = boldBorderStyle;
-    
+
                 const cellD = worksheet.getCell(`D${currentRowForNewItems}`);
-                cellD.value = item.CONTENIDO;
+                cellD.value = item.DESCRIPCION_GENERAL;
                 cellD.border = boldBorderStyle;
-    
+
                 const cellE = worksheet.getCell(`E${currentRowForNewItems}`);
-                cellE.value = item.DETALLE;
+                cellE.value = item.COMPOSICION;
                 cellE.border = boldBorderStyle;
-    
+
                 const cellF = worksheet.getCell(`F${currentRowForNewItems}`);
-                cellF.value = item.COMPOSICION;
+                cellF.value = item.DETALLE_ADUANAL;
                 cellF.border = boldBorderStyle;
     
                 const cellG = worksheet.getCell(`G${currentRowForNewItems}`);

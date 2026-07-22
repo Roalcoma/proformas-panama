@@ -336,44 +336,48 @@ export class ClassExcelGuatemala {
                 worksheet.insertRow(currentRowForNewItems, []);
     
                 const cellA = worksheet.getCell(`A${currentRowForNewItems}`);
-                cellA.value = item.CODIGO;
+                cellA.value = item.REFERENCIA;
                 cellA.border = boldBorderStyle;
-    
+
                 const cellB = worksheet.getCell(`B${currentRowForNewItems}`);
-                cellB.value = item.CONTENIDO;
+                cellB.value = item.CODIGO;
                 cellB.border = boldBorderStyle;
-    
+
                 const cellC = worksheet.getCell(`C${currentRowForNewItems}`);
-                cellC.value = item.DETALLE;
+                cellC.value = item.FRAGANCIA;
                 cellC.border = boldBorderStyle;
-    
+
                 const cellD = worksheet.getCell(`D${currentRowForNewItems}`);
-                cellD.value = item.DESCRIPCION_GENERAL;
+                cellD.value = item.ESENCIA_REG;
                 cellD.border = boldBorderStyle;
-    
+
                 const cellE = worksheet.getCell(`E${currentRowForNewItems}`);
-                cellE.value = item.FRAGANCIA;
+                cellE.value = item.DESCRIPCION_GENERAL;
                 cellE.border = boldBorderStyle;
-    
+
                 const cellF = worksheet.getCell(`F${currentRowForNewItems}`);
-                cellF.value = item.ORIGEN;
+                cellF.value = item.COMPOSICION;
                 cellF.border = boldBorderStyle;
-    
+
                 const cellG = worksheet.getCell(`G${currentRowForNewItems}`);
-                cellG.value = item.MARCA;
+                cellG.value = item.ORIGEN;
                 cellG.border = boldBorderStyle;
-    
+
                 const cellH = worksheet.getCell(`H${currentRowForNewItems}`);
-                cellH.value = item.CANTIDAD;
+                cellH.value = item.MARCA;
                 cellH.border = boldBorderStyle;
-    
+
                 const cellI = worksheet.getCell(`I${currentRowForNewItems}`);
-                cellI.value = item.PRECIO;
+                cellI.value = item.CANTIDAD;
                 cellI.border = boldBorderStyle;
-    
+
                 const cellJ = worksheet.getCell(`J${currentRowForNewItems}`);
-                cellJ.value = item.TOTAL;
+                cellJ.value = item.PRECIO;
                 cellJ.border = boldBorderStyle;
+
+                const cellK = worksheet.getCell(`K${currentRowForNewItems}`);
+                cellK.value = item.TOTAL;
+                cellK.border = boldBorderStyle;
     
                 currentRowForNewItems++; // Avanza a la siguiente fila para el próximo ítem
             });
@@ -399,16 +403,16 @@ export class ClassExcelGuatemala {
             const despacho = worksheet.getCell(`A${realRowsTotal + 9}`);
             despacho.value = `Via de Despacho: ${dataToInsert.clientDespacho}`;
     
-            const totalBrutoCell = worksheet.getCell(`J${realRowsTotal}`);
+            const totalBrutoCell = worksheet.getCell(`K${realRowsTotal}`);
             totalBrutoCell.value = dataToInsert.totalBruto;
             //totalBrutoCell.border = boldBorderStyle; // Aplicar borde
-    
-            const totalNetoCell = worksheet.getCell(`J${realRowsTotal + 3}`);
+
+            const totalNetoCell = worksheet.getCell(`K${realRowsTotal + 3}`);
             totalNetoCell.value = dataToInsert.totalNeto;
             //totalNetoCell.border = boldBorderStyle; // Aplicar borde
-    
+
             const lastRowBeauty = worksheet.lastRow.number;
-            worksheet.pageSetup.printArea = `A1:J${lastRowBeauty}`;
+            worksheet.pageSetup.printArea = `A1:K${lastRowBeauty}`;
             worksheet.views = [{ state: 'normal', showGridLines: true }];
     
             const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;

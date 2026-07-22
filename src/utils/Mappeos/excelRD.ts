@@ -336,52 +336,56 @@ export class ClassExcelRD {
                 worksheet.insertRow(currentRowForNewItems, []);
     
                 const cellA = worksheet.getCell(`A${currentRowForNewItems}`);
-                cellA.value = item.CODIGO;
+                cellA.value = item.REFERENCIA;
                 cellA.border = boldBorderStyle;
-    
+
                 const cellB = worksheet.getCell(`B${currentRowForNewItems}`);
-                cellB.value = item.NUM_LOTE;
+                cellB.value = item.CODIGO;
                 cellB.border = boldBorderStyle;
-    
+
                 const cellC = worksheet.getCell(`C${currentRowForNewItems}`);
-                cellC.value = item.FECHA_VENCIMIENTO;
+                cellC.value = item.NUM_LOTE;
                 cellC.border = boldBorderStyle;
-    
+
                 const cellD = worksheet.getCell(`D${currentRowForNewItems}`);
-                cellD.value = item.CONTENIDO;
+                cellD.value = item.FECHA_VENCIMIENTO;
                 cellD.border = boldBorderStyle;
-    
+
                 const cellE = worksheet.getCell(`E${currentRowForNewItems}`);
-                cellE.value = item.DESCRIPCION_GENERAL;
+                cellE.value = item.CONTENIDO;
                 cellE.border = boldBorderStyle;
-    
+
                 const cellF = worksheet.getCell(`F${currentRowForNewItems}`);
-                cellF.value = item.DETALLE_ADUANAL;
+                cellF.value = item.DESCRIPCION_GENERAL;
                 cellF.border = boldBorderStyle;
-    
+
                 const cellG = worksheet.getCell(`G${currentRowForNewItems}`);
                 cellG.value = item.COMPOSICION;
                 cellG.border = boldBorderStyle;
-    
+
                 const cellH = worksheet.getCell(`H${currentRowForNewItems}`);
-                cellH.value = item.ORIGEN;
+                cellH.value = item.DETALLE_ADUANAL;
                 cellH.border = boldBorderStyle;
-    
+
                 const cellI = worksheet.getCell(`I${currentRowForNewItems}`);
-                cellI.value = item.MARCA;
+                cellI.value = item.ORIGEN;
                 cellI.border = boldBorderStyle;
-    
+
                 const cellJ = worksheet.getCell(`J${currentRowForNewItems}`);
-                cellJ.value = item.CANTIDAD;
+                cellJ.value = item.MARCA;
                 cellJ.border = boldBorderStyle;
-    
+
                 const cellK = worksheet.getCell(`K${currentRowForNewItems}`);
-                cellK.value = item.PRECIO;
+                cellK.value = item.CANTIDAD;
                 cellK.border = boldBorderStyle;
-    
+
                 const cellL = worksheet.getCell(`L${currentRowForNewItems}`);
-                cellL.value = item.TOTAL;
+                cellL.value = item.PRECIO;
                 cellL.border = boldBorderStyle;
+
+                const cellM = worksheet.getCell(`M${currentRowForNewItems}`);
+                cellM.value = item.TOTAL;
+                cellM.border = boldBorderStyle;
     
                 currentRowForNewItems++; // Avanza a la siguiente fila para el próximo ítem
             });
@@ -407,16 +411,16 @@ export class ClassExcelRD {
             const despacho = worksheet.getCell(`A${realRowsTotal + 9}`);
             despacho.value = `Via de Despacho: ${dataToInsert.clientDespacho}`;
     
-            const totalBrutoCell = worksheet.getCell(`L${realRowsTotal}`);
+            const totalBrutoCell = worksheet.getCell(`M${realRowsTotal}`);
             totalBrutoCell.value = dataToInsert.totalBruto;
             //totalBrutoCell.border = boldBorderStyle; // Aplicar borde
-    
-            const totalNetoCell = worksheet.getCell(`L${realRowsTotal + 3}`);
+
+            const totalNetoCell = worksheet.getCell(`M${realRowsTotal + 3}`);
             totalNetoCell.value = dataToInsert.totalNeto;
             //totalNetoCell.border = boldBorderStyle; // Aplicar borde
-    
+
             const lastRowBeauty = worksheet.lastRow.number;
-            worksheet.pageSetup.printArea = `A1:L${lastRowBeauty}`;
+            worksheet.pageSetup.printArea = `A1:M${lastRowBeauty}`;
             worksheet.views = [{ state: 'normal', showGridLines: true }];
     
             const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;

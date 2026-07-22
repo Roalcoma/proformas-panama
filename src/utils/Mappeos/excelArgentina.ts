@@ -357,19 +357,19 @@ export class ClassExcelArgentina {
                 cellB.border = boldBorderStyle;
     
                 const cellC = worksheet.getCell(`C${currentRowForNewItems}`);
-                cellC.value = item.CONTENIDO;
+                cellC.value = item.FRAGANCIA;
                 cellC.border = boldBorderStyle;
-    
+
                 const cellD = worksheet.getCell(`D${currentRowForNewItems}`);
                 cellD.value = item.DESCRIPCION_GENERAL;
                 cellD.border = boldBorderStyle;
-    
+
                 const cellE = worksheet.getCell(`E${currentRowForNewItems}`);
-                cellE.value = item.DETALLE;
+                cellE.value = item.COMPOSICION;
                 cellE.border = boldBorderStyle;
-    
+
                 const cellF = worksheet.getCell(`F${currentRowForNewItems}`);
-                cellF.value = item.COMPOSICION;
+                cellF.value = item.DETALLE_ADUANAL;
                 cellF.border = boldBorderStyle;
     
                 const cellG = worksheet.getCell(`G${currentRowForNewItems}`);

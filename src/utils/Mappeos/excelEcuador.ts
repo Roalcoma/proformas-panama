@@ -356,54 +356,50 @@ export class ClassExcelEcuador {
                 const cellA = worksheet.getCell(`A${currentRowForNewItems}`);
                 cellA.value = item.REFERENCIA;
                 cellA.border = boldBorderStyle;
-    
+
                 const cellB = worksheet.getCell(`B${currentRowForNewItems}`);
                 cellB.value = item.CODIGO;
                 cellB.border = boldBorderStyle;
-    
+
                 const cellC = worksheet.getCell(`C${currentRowForNewItems}`);
-                cellC.value = item.CONTENIDO;
+                cellC.value = item.FRAGANCIA;
                 cellC.border = boldBorderStyle;
-    
+
                 const cellD = worksheet.getCell(`D${currentRowForNewItems}`);
-                cellD.value = item.DESCRIPCION_GENERAL;
+                cellD.value = item.SET_REGALO;
                 cellD.border = boldBorderStyle;
-    
+
                 const cellE = worksheet.getCell(`E${currentRowForNewItems}`);
-                cellE.value = item.DETALLE_ADUANAL;
+                cellE.value = item.DESCRIPCION_GENERAL;
                 cellE.border = boldBorderStyle;
-    
+
                 const cellF = worksheet.getCell(`F${currentRowForNewItems}`);
                 cellF.value = item.COMPOSICION;
                 cellF.border = boldBorderStyle;
-    
+
                 const cellG = worksheet.getCell(`G${currentRowForNewItems}`);
-                cellG.value = item.FRAGANCIA;
+                cellG.value = item.DETALLE_ADUANAL;
                 cellG.border = boldBorderStyle;
-    
+
                 const cellH = worksheet.getCell(`H${currentRowForNewItems}`);
-                cellH.value = item.SET_REGALO;
+                cellH.value = item.ORIGEN;
                 cellH.border = boldBorderStyle;
-    
+
                 const cellI = worksheet.getCell(`I${currentRowForNewItems}`);
-                cellI.value = item.ORIGEN;
+                cellI.value = item.MARCA;
                 cellI.border = boldBorderStyle;
-    
+
                 const cellJ = worksheet.getCell(`J${currentRowForNewItems}`);
-                cellJ.value = item.MARCA;
+                cellJ.value = item.CANTIDAD;
                 cellJ.border = boldBorderStyle;
-    
+
                 const cellK = worksheet.getCell(`K${currentRowForNewItems}`);
-                cellK.value = item.CANTIDAD;
+                cellK.value = item.PRECIO;
                 cellK.border = boldBorderStyle;
-    
+
                 const cellL = worksheet.getCell(`L${currentRowForNewItems}`);
-                cellL.value = item.PRECIO;
+                cellL.value = item.TOTAL;
                 cellL.border = boldBorderStyle;
-    
-                const cellM = worksheet.getCell(`M${currentRowForNewItems}`);
-                cellM.value = item.TOTAL;
-                cellM.border = boldBorderStyle;
     
                 currentRowForNewItems++; // Avanza a la siguiente fila para el próximo ítem
             });
@@ -429,16 +425,16 @@ export class ClassExcelEcuador {
             const despacho = worksheet.getCell(`A${realRowsTotal + 9}`);
             despacho.value = `Via de Despacho: ${dataToInsert.clientDespacho}`;
     
-            const totalBrutoCell = worksheet.getCell(`M${realRowsTotal}`);
+            const totalBrutoCell = worksheet.getCell(`L${realRowsTotal}`);
             totalBrutoCell.value = dataToInsert.totalBruto;
             totalBrutoCell.border = boldBorderStyle; // Aplicar borde
-    
-            const totalNetoCell = worksheet.getCell(`M${realRowsTotal + 3}`);
+
+            const totalNetoCell = worksheet.getCell(`L${realRowsTotal + 3}`);
             totalNetoCell.value = dataToInsert.totalNeto;
             totalNetoCell.border = boldBorderStyle; // Aplicar borde
-    
+
             const lastRowBeauty = worksheet.lastRow.number;
-            worksheet.pageSetup.printArea = `A1:M${lastRowBeauty}`;
+            worksheet.pageSetup.printArea = `A1:L${lastRowBeauty}`;
             worksheet.views = [{ state: 'normal', showGridLines: true }];
     
             const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
