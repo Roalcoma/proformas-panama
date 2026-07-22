@@ -6,12 +6,7 @@ import { GeneradorModel } from "../models/generador.model";
 import { generateExcel } from "../utils/generadorExcel";
 
 // Ruta al directorio temporal para los archivos generados
-const outputDir = path.join(__dirname, '..', 'generated_files'); // Renombrado para ser más genérico
-
-let serieFac: string;
-let numFacIni: number;
-let numFacFin: number;
-let tipoExcelLet: string;
+const outputDir = path.join(__dirname, '..', 'generated_files');
 
 
 const getDataClient = async (numSerie: string, numFacturaIni: string, numFacturaFin: string, db: string) => {
@@ -41,11 +36,6 @@ export class GeneradorController {
             }
 
             const infoCliente: any = await getDataClient(numSerie, numFacturaIni, numFacturaFin, db)
-
-            serieFac = numSerie as string;
-            numFacIni = parseInt(numFacturaIni as string, 10);
-            numFacFin = parseInt(numFacturaFin as string, 10);
-            tipoExcelLet = tipoExcel as string;
 
             console.log('Información del cliente obtenida:', infoCliente);
 
@@ -101,8 +91,10 @@ export class GeneradorController {
                     marca = 'VSFA'
                 } else if(db === 'VSBA') {
                     marca = 'VSBA'
+                } else if(db === 'VS') {
+                    marca = 'VSBA'
                 } else {
-                    marca = 'BEAUTY'
+                    throw new Error(`Base de datos no reconocida: ${db}`);
                 }
 
                 const archivoExcel = await generateExcel(sampleData, tipoExcel as string, marca);
@@ -145,7 +137,19 @@ export class GeneradorController {
 
     static async downloadZip(req: express.Request, res: express.Response): Promise<void> {
         try {
-            const zipFileName = `Facturas_${serieFac}_${numFacIni}_${numFacFin}_${tipoExcelLet}.zip`;
+            const { numSerie, numFacturaIni, numFacturaFin, tipoExcel } = req.query;
+
+            if (
+                typeof numSerie !== 'string' ||
+                typeof numFacturaIni !== 'string' ||
+                typeof numFacturaFin !== 'string' ||
+                typeof tipoExcel !== 'string'
+            ) {
+                res.status(400).send('Parámetros requeridos: numSerie, numFacturaIni, numFacturaFin, tipoExcel');
+                return;
+            }
+
+            const zipFileName = `Facturas_${numSerie}_${numFacturaIni}_${numFacturaFin}_${tipoExcel}.zip`;
             const zipFilePath = path.join(outputDir, zipFileName);
             
             // Verificar si el archivo ya existe

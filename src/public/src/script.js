@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const customFilename = `Facturas_${serieFac}_${numFacIni}_${numFacFin}_${selectedTemplate}.zip`;
             console.log('Nombre de archivo construido localmente:', customFilename);
 
-            const response = await fetch(`http://172.20.1.67:9000/generador/download-zip`, {
+            const response = await fetch(`http://172.20.1.67:9000/generador/download-zip?numSerie=${serieFac}&numFacturaIni=${numFacIni}&numFacturaFin=${numFacFin}&tipoExcel=${selectedTemplate}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json'

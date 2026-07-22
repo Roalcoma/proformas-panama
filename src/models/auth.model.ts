@@ -9,16 +9,16 @@ const config: sql.config = {
     port: parseInt(process.env.DB_PORT || '1433', 10), // Convertir a número
     database: 'GENERAL', // Cambia esto al nombre de tu base de datos
     options: {
-        encrypt: process.env.DB_ENCRYPT === 'true', // Usar SSL/TLS, true para Azure SQL Database
-        trustServerCertificate: process.env.DB_TRUST_SERVER_CERTIFICATE === 'true' // Cambiar a true para desarrollo local si usas certificados auto-firmados
+        encrypt: process.env.DB_ENCRYPT === 'true',
+        trustServerCertificate: process.env.DB_TRUST_SERVER_CERTIFICATE === 'true'
     }
 };
 
 export class AuthModel {
     static async login(password: string): Promise<any> {
         try {
-            await connectDb(config);
-            const request = new mssql.Request();
+            const pool = await connectDb(config);
+            const request = pool.request();
             request.input('NEWPASS', mssql.VarChar, encriptacion.encriptar(password));
             const result = await request.query(`SELECT U.CODUSUARIO, U.USUARIO, SUBSTRING(EM.PATHBD, CHARINDEX(':', EM.PATHBD) + 1, LEN(EM.PATHBD)) DB FROM USUARIOS U
                                                 INNER JOIN EMPRESASUSUARIO EMU ON EMU.CODUSUARIO = U.CODUSUARIO

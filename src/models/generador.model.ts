@@ -39,6 +39,8 @@ export class GeneradorModel {
                 return querys.getDataVSFA
             } else if(db === 'VSBA') {
                 return querys.getDataVSBA
+            } else if(db === 'VS') {
+                return querys.getDataVS
             } else {
                 return querys.getData
             }
@@ -64,6 +66,8 @@ export class GeneradorModel {
                 return querys.getDataByClientVSFA
             } else if(db === 'VSBA') {
                 return querys.getDataByClientVSBA
+            } else if(db === 'VS') {
+                return querys.getDataByClientVS
             } else {
                 return querys.getDataByClient
             }

@@ -223,4 +223,5 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
         }
     }
 
+    throw new Error(`No hay handler para marca="${marca}", país="${dataToInsert.invoicePais}"`);
 }

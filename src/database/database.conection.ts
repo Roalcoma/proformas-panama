@@ -8,8 +8,10 @@ let pool: sql.ConnectionPool | null = null;
 export async function connectDb(config: sql.config): Promise<sql.ConnectionPool> {
     try {
         if (pool && pool.connected) {
-            console.log('Usando pool de conexión existente.');
-            return pool;
+            if ((pool as any).config?.database === config.database) {
+                return pool;
+            }
+            await pool.close();
         }
 
         pool = await sql.connect(config);

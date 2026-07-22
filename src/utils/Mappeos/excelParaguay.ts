@@ -5,30 +5,30 @@ export class ClassExcelParaguay {
     static async excelParaguay(dataToInsert: any, items: any, tipoExcel: string, workbook: any, worksheet: any, boldBorderStyle: any, outputDir: any, path: any): Promise<string> {
         let newFilePath: any = '';
     
-        const clientCodeCell = worksheet.getCell('I1');
+        const clientCodeCell = worksheet.getCell('G1');
         clientCodeCell.value = `Cliente N°: ${dataToInsert.clientCode}`;
         clientCodeCell.border = boldBorderStyle; // Aplicar borde
     
-        const clientNameCell = worksheet.getCell('I3');
+        const clientNameCell = worksheet.getCell('G3');
         clientNameCell.value = `${dataToInsert.clientName}`;
         clientNameCell.border = {
                             top: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }, // Negro
                             left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }
                         };
     
-        const clientAddressCell = worksheet.getCell('I5');
+        const clientAddressCell = worksheet.getCell('G5');
         clientAddressCell.value = `${dataToInsert.clientAddress}`;
         clientAddressCell.border = {
                                 left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
                             };
     
-        const clientNifCell = worksheet.getCell('I4');
+        const clientNifCell = worksheet.getCell('G4');
         clientNifCell.value = `${dataToInsert.clientNif}`;
         clientNifCell.border = {
                                 left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
                             };
     
-        const clientPhoneCell = worksheet.getCell('I7');
+        const clientPhoneCell = worksheet.getCell('G7');
         clientPhoneCell.value = `Teléfono: ${dataToInsert.clientPhone}`;
         clientPhoneCell.border = {
                             left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
