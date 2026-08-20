@@ -1,4 +1,4 @@
-import ExcelJS from 'exceljs';
+﻿import ExcelJS from 'exceljs';
 
 export class ClassExcelPeru {
 
@@ -20,13 +20,13 @@ export class ClassExcelPeru {
                             };
     
             const clientAddressCell = worksheet.getCell('I5');
-            clientAddressCell.value = `${dataToInsert.clientAddress}`;
+            clientAddressCell.value = dataToInsert.clientAddress ?? "";
             clientAddressCell.border = {
                                     left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
                                 };
     
             const clientNifCell = worksheet.getCell('I4');
-            clientNifCell.value = `${dataToInsert.clientNif}`;
+            clientNifCell.value = dataToInsert.clientNif ?? "";
             clientNifCell.border = {
                                     left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
                                 };
@@ -116,7 +116,7 @@ export class ClassExcelPeru {
             totalCajas.border = boldBorderStyle; // Aplicar borde
     
             const formaPago = worksheet.getCell(`A${realRowsTotal + 4}`);
-            formaPago.value = `Forma de Pago: ${dataToInsert.clientFormaPago}`;
+            formaPago.value = "Forma de Pago: CREDITO 270 DIAS desde el Zarpe de la Nave";
     
             const moneda = worksheet.getCell(`A${realRowsTotal + 5}`);
             moneda.value = `Moneda de Negociación: ${dataToInsert.clientMoneda}`;
@@ -157,13 +157,13 @@ export class ClassExcelPeru {
                             };
     
             const clientAddressCell = worksheet.getCell('H5');
-            clientAddressCell.value = `${dataToInsert.clientAddress}`;
+            clientAddressCell.value = dataToInsert.clientAddress ?? "";
             clientAddressCell.border = {
                                     left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
                                 }; 
     
             const clientNifCell = worksheet.getCell('H4');
-            clientNifCell.value = `${dataToInsert.clientNif}`;
+            clientNifCell.value = dataToInsert.clientNif ?? "";
             clientNifCell.border = {
                                     left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
                                 };
@@ -257,7 +257,7 @@ export class ClassExcelPeru {
             totalCajas.border = boldBorderStyle; // Aplicar borde
     
             const formaPago = worksheet.getCell(`A${realRowsTotal + 4}`);
-            formaPago.value = `Forma de Pago: ${dataToInsert.clientFormaPago}`;
+            formaPago.value = "Forma de Pago: CREDITO 270 DIAS desde el Zarpe de la Nave";
     
             const moneda = worksheet.getCell(`A${realRowsTotal + 5}`);
             moneda.value = `Moneda de Negociación: ${dataToInsert.clientMoneda}`;
@@ -301,11 +301,11 @@ export class ClassExcelPeru {
                 
         
             const clientAddressCell = worksheet.getCell('A12');
-            clientAddressCell.value = `${dataToInsert.clientAddress}`;
+            clientAddressCell.value = dataToInsert.clientAddress ?? "";
             
     
             const clientNifCell = worksheet.getCell('A13');
-            clientNifCell.value = `${dataToInsert.clientNif}`;
+            clientNifCell.value = dataToInsert.clientNif ?? "";
             
     
             const clientPhoneCell = worksheet.getCell('A14');
@@ -358,15 +358,15 @@ export class ClassExcelPeru {
                 cellF.border = boldBorderStyle;
 
                 const cellG = worksheet.getCell(`G${currentRowForNewItems}`);
-                cellG.value = item.NOMBRE_COMERCIAL_ALTER;
+                cellG.value = item.FRAGANCIA;
                 cellG.border = boldBorderStyle;
 
                 const cellH = worksheet.getCell(`H${currentRowForNewItems}`);
-                cellH.value = item.DETALLE_ADUANAL;
+                cellH.value = item.DESCRIPCION_GENERAL;
                 cellH.border = boldBorderStyle;
 
                 const cellI = worksheet.getCell(`I${currentRowForNewItems}`);
-                cellI.value = item.DETALLE_ADUANAL;
+                cellI.value = item.DESCRIPCION_GENERAL;
                 cellI.border = boldBorderStyle;
 
                 const cellJ = worksheet.getCell(`J${currentRowForNewItems}`);
@@ -409,7 +409,7 @@ export class ClassExcelPeru {
             //totalCajas.border = boldBorderStyle; // Aplicar borde
     
             const formaPago = worksheet.getCell(`A${realRowsTotal + 6}`);
-            formaPago.value = `Forma de Pago: ${dataToInsert.clientFormaPago}`;
+            formaPago.value = "Forma de Pago: CREDITO 270 DIAS desde el Zarpe de la Nave";
     
             const moneda = worksheet.getCell(`A${realRowsTotal + 7}`);
             moneda.value = `Moneda de Negociación: ${dataToInsert.clientMoneda}`;
@@ -417,11 +417,11 @@ export class ClassExcelPeru {
             const despacho = worksheet.getCell(`A${realRowsTotal + 9}`);
             despacho.value = `Via de Despacho: ${dataToInsert.clientDespacho}`;
     
-            const totalBrutoCell = worksheet.getCell(`O${realRowsTotal}`);
+            const totalBrutoCell = worksheet.getCell(`L${realRowsTotal}`);
             totalBrutoCell.value = dataToInsert.totalBruto;
             //totalBrutoCell.border = boldBorderStyle; // Aplicar borde
 
-            const totalNetoCell = worksheet.getCell(`O${realRowsTotal + 3}`);
+            const totalNetoCell = worksheet.getCell(`L${realRowsTotal + 3}`);
             totalNetoCell.value = dataToInsert.totalNeto;
             //totalNetoCell.border = boldBorderStyle; // Aplicar borde
 
@@ -450,13 +450,13 @@ export class ClassExcelPeru {
                             };
     
             const clientAddressCell = worksheet.getCell('H5');
-            clientAddressCell.value = `${dataToInsert.clientAddress}`;
+            clientAddressCell.value = dataToInsert.clientAddress ?? "";
             clientAddressCell.border = {
                                     left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
                                 }; 
     
             const clientNifCell = worksheet.getCell('H4');
-            clientNifCell.value = `${dataToInsert.clientNif}`;
+            clientNifCell.value = dataToInsert.clientNif ?? "";
             clientNifCell.border = {
                                     left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
                                 };
@@ -548,7 +548,7 @@ export class ClassExcelPeru {
             //totalCajas.border = boldBorderStyle; // Aplicar borde
     
             const formaPago = worksheet.getCell(`A${realRowsTotal + 4}`);
-            formaPago.value = `Forma de Pago: ${dataToInsert.clientFormaPago}`;
+            formaPago.value = "Forma de Pago: CREDITO 270 DIAS desde el Zarpe de la Nave";
     
             const moneda = worksheet.getCell(`A${realRowsTotal + 5}`);
             moneda.value = `Moneda de Negociación: ${dataToInsert.clientMoneda}`;
