@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+﻿document.addEventListener('DOMContentLoaded', () => {
     const isAuthenticated = localStorage.getItem('isAuthenticated');
     if (isAuthenticated !== 'true') {
         window.location.href = '/login';
@@ -12,7 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const numFacIniInput = document.getElementById('numFacIni');
     const numFacFinInput = document.getElementById('numFacFin');
     const templateSelect = document.getElementById('templateSelect');
+    const embarqueGroup = document.getElementById('embarqueGroup');
     const generateBtn = document.getElementById('generateBtn');
+
+    templateSelect.addEventListener('change', () => {
+        embarqueGroup.style.display = templateSelect.value === 'ACC' ? 'block' : 'none';
+    });
+
+    const getSelectedTemplate = () => {
+        if (templateSelect.value === 'ACC') {
+            const checked = document.querySelector('input[name="embarque"]:checked');
+            return checked ? checked.value : 'ACC';
+        }
+        return templateSelect.value;
+    };
 
     const loadingSection = document.getElementById('loading');
     const downloadSection = document.getElementById('downloadSection');
@@ -116,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const serieFac = serieFacInput.value;
         const numFacIni = parseInt(numFacIniInput.value, 10);
         const numFacFin = parseInt(numFacFinInput.value, 10);
-        const selectedTemplate = templateSelect.value;
+        const selectedTemplate = getSelectedTemplate();
 
         console.log(DB)
 
@@ -141,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const serieFac = serieFacInput.value;
         const numFacIni = parseInt(numFacIniInput.value, 10);
         const numFacFin = parseInt(numFacFinInput.value, 10);
-        const selectedTemplate = templateSelect.value;
+        const selectedTemplate = getSelectedTemplate();
 
         closePreviewModal()
 
@@ -305,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const serieFac = serieFacInput.value;
             const numFacIni = parseInt(numFacIniInput.value, 10);
             const numFacFin = parseInt(numFacFinInput.value, 10);
-            const selectedTemplate = templateSelect.value;
+            const selectedTemplate = getSelectedTemplate();
             
             const customFilename = `Facturas_${serieFac}_${numFacIni}_${numFacFin}_${selectedTemplate}.zip`;
             console.log('Nombre de archivo construido localmente:', customFilename);

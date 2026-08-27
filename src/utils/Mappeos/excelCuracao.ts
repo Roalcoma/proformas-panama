@@ -331,15 +331,16 @@ export class ClassExcelCuracao {
                 //cellB.border = boldBorderStyle;
 
                 const cellC = worksheet.getCell(`C${currentRowForNewItems}`);
-                cellC.value = item.DESCRIPCION_GENERAL;
+                cellC.value = item.CONTENIDO;
                 //cellC.border = boldBorderStyle;
+                
 
                 const cellD = worksheet.getCell(`D${currentRowForNewItems}`);
-                cellD.value = item.COMPOSICION;
+                cellD.value = item.DESCRIPCION_GENERAL;
                 //cellD.border = boldBorderStyle;
 
                 const cellE = worksheet.getCell(`E${currentRowForNewItems}`);
-                cellE.value = item.DETALLE_ADUANAL;
+                cellE.value = item.COMPOSICION;
                 //cellE.border = boldBorderStyle;
 
                 const cellF = worksheet.getCell(`F${currentRowForNewItems}`);

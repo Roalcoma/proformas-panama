@@ -30,6 +30,17 @@
                     <option value="ACC">Excel ACC/SUP</option>
                 </select>
             </div>
+            <div class="form-group" id="embarqueGroup" style="display:none;">
+                <label>Tipo de Embarque:</label>
+                <div style="display:flex; gap:1.5rem; margin-top:6px;">
+                    <label style="display:flex; align-items:center; gap:6px; font-weight:normal; cursor:pointer;">
+                        <input type="radio" name="embarque" value="ACC" checked> Sin Embarque Directo
+                    </label>
+                    <label style="display:flex; align-items:center; gap:6px; font-weight:normal; cursor:pointer;">
+                        <input type="radio" name="embarque" value="ACC_ED"> Embarque Directo
+                    </label>
+                </div>
+            </div>
             <button type="submit" id="generateBtn">Generar Proforma</button>
         </form>
 

@@ -37,7 +37,7 @@ export async function generateExcel(sampleData: any, tipoExcel: string, marca: s
     if (marca === 'BBW') {
         templatePath = path.join(templatesDir, `${dataToInsert.invoicePais}_${tipoExcel}.xlsx`);
     } else {
-        if (tipoExcel === 'BEAUTY') {
+        if (tipoExcel === 'BEAUTY' || tipoExcel === 'ACC_ED') {
             templatePath = path.join(templatesDir, `VSFA_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`);
         } else {
             templatePath = path.join(templatesDir, `VSFA_${tipoExcel}.xlsx`);

@@ -36,9 +36,9 @@ export class GeneradorModel {
             if(db === 'BBW_NEW'){
                 return querys.getData
             } else if(db === 'VSFC_PMA'){
-                return querys.getDataVSFA
+                return querys.getDataVS
             } else if(db === 'VSBA') {
-                return querys.getDataVSBA
+                return querys.getDataVS
             } else if(db === 'VS') {
                 return querys.getDataVS
             } else {

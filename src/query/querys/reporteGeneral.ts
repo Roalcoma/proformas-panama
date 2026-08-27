@@ -159,7 +159,9 @@ export const reporteVSFA = `
             X.TOTAL_LINEA_BASE AS TOTAL,
             X.TOTAL_NETO,
             X.TOTAL_BRUTO,
-            X.TOTAL_UNIDADES
+            X.TOTAL_UNIDADES,
+            X.HSTARIFF AS US_TARIFF,
+            X.NORMA AS CLASE
 
         FROM
         (
@@ -187,6 +189,8 @@ export const reporteVSFA = `
                 TA.TOTAL_UNIDADES,
                 ACL.DESCRIPCION_ESP AS ACL_NOM_SANITARIO,
                 ACL.SIZE_DESC_BA,
+                ACL.HSTARIFF,
+                (SELECT TOP 1 A.NORMA FROM ARTICULOS A WHERE A.CODARTICULO = LIN.CODARTICULO) AS NORMA,
                 (LIN.TOTAL * CAB.FACTORMONEDA) / CASE WHEN LIN.UNIDADESTOTAL = 0 THEN 1 ELSE LIN.UNIDADESTOTAL END AS PRECIO_UNITARIO_BASE,
                 LIN.TOTAL * CAB.FACTORMONEDA AS TOTAL_LINEA_BASE
 

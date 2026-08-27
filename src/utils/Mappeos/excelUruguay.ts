@@ -1,4 +1,4 @@
-import ExcelJS from 'exceljs';
+﻿import ExcelJS from 'exceljs';
 
 export class ClassExcelUruguay {
     
@@ -554,8 +554,100 @@ export class ClassExcelUruguay {
             newFilePath = path.join(outputDir, newFileName);
     
             await workbook.xlsx.writeFile(newFilePath);
+        } else if (tipoExcel === 'ACC_ED') {
+            const clientCodeCell = worksheet.getCell('H1');
+            clientCodeCell.value = `Cliente N°: ${dataToInsert.clientCode}`;
+            clientCodeCell.border = boldBorderStyle;
+
+            const clientNameCell = worksheet.getCell('H3');
+            clientNameCell.value = `${dataToInsert.clientName}`;
+            clientNameCell.border = {
+                                top: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
+                                left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }
+                            };
+
+            const clientAddressCell = worksheet.getCell('H5');
+            clientAddressCell.value = dataToInsert.clientAddress ?? '';
+            clientAddressCell.border = {
+                                    left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
+                                };
+
+            const clientNifCell = worksheet.getCell('H4');
+            clientNifCell.value = dataToInsert.clientNif ?? '';
+            clientNifCell.border = {
+                                    left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
+                                };
+
+            const clientPhoneCell = worksheet.getCell('H7');
+            clientPhoneCell.value = `Teléfono: ${dataToInsert.clientPhone}`;
+            clientPhoneCell.border = {
+                                left: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } },
+                                bottom: { style: 'medium' as ExcelJS.BorderStyle, color: { argb: 'FF000000' } }
+                            };
+
+            const invoiceDateCell = worksheet.getCell('A9');
+            invoiceDateCell.value = dataToInsert.invoiceDate;
+            invoiceDateCell.border = boldBorderStyle;
+
+            const invoiceNumberCell = worksheet.getCell('B9');
+            invoiceNumberCell.value = dataToInsert.invoiceNumber;
+            invoiceNumberCell.border = boldBorderStyle;
+
+            const startRowForItems = 12;
+            const startRowForTotals = 13;
+            const realRowsTotal = startRowForTotals + items.length;
+            let currentRowForNewItems = startRowForItems;
+
+            items.forEach((item: any) => {
+                worksheet.insertRow(currentRowForNewItems, []);
+                const cellA = worksheet.getCell(`A${currentRowForNewItems}`); cellA.value = item.REFERENCIA; cellA.border = boldBorderStyle;
+                const cellB = worksheet.getCell(`B${currentRowForNewItems}`); cellB.value = item.CODIGO; cellB.border = boldBorderStyle;
+                const cellC = worksheet.getCell(`C${currentRowForNewItems}`); cellC.value = item.CONTENIDO; cellC.border = boldBorderStyle;
+                const cellD = worksheet.getCell(`D${currentRowForNewItems}`); cellD.value = item.DESCRIPCION_GENERAL; cellD.border = boldBorderStyle;
+                const cellE = worksheet.getCell(`E${currentRowForNewItems}`); cellE.value = item.COMPOSICION; cellE.border = boldBorderStyle;
+                const cellF = worksheet.getCell(`F${currentRowForNewItems}`); cellF.value = item.US_TARIFF ?? ''; cellF.border = boldBorderStyle;
+                const cellG = worksheet.getCell(`G${currentRowForNewItems}`); cellG.value = item.ORIGEN; cellG.border = boldBorderStyle;
+                const cellH = worksheet.getCell(`H${currentRowForNewItems}`); cellH.value = item.MARCA; cellH.border = boldBorderStyle;
+                const cellI = worksheet.getCell(`I${currentRowForNewItems}`); cellI.value = item.CANTIDAD; cellI.border = boldBorderStyle;
+                const cellJ = worksheet.getCell(`J${currentRowForNewItems}`); cellJ.value = item.PRECIO; cellJ.border = boldBorderStyle;
+                const cellK = worksheet.getCell(`K${currentRowForNewItems}`); cellK.value = item.TOTAL; cellK.border = boldBorderStyle;
+                currentRowForNewItems++;
+            });
+
+            const totalUnidadesCell = worksheet.getCell(`B${realRowsTotal}`);
+            totalUnidadesCell.value = dataToInsert.totalUnidades;
+
+            const pesoBruto = worksheet.getCell(`B${realRowsTotal + 2}`);
+            pesoBruto.value = dataToInsert.clientPeso;
+
+            const totalCajas = worksheet.getCell(`B${realRowsTotal + 1}`);
+            totalCajas.value = dataToInsert.clientBulto;
+
+            const formaPago = worksheet.getCell(`A${realRowsTotal + 4}`);
+            formaPago.value = `Forma de Pago: ${dataToInsert.clientFormaPago}`;
+
+            const moneda = worksheet.getCell(`A${realRowsTotal + 5}`);
+            moneda.value = `Moneda de Negociación: ${dataToInsert.clientMoneda}`;
+
+            const despacho = worksheet.getCell(`A${realRowsTotal + 7}`);
+            despacho.value = `Via de Despacho: ${dataToInsert.clientDespacho}`;
+
+            const totalBrutoCell = worksheet.getCell(`K${realRowsTotal}`);
+            totalBrutoCell.value = dataToInsert.totalBruto;
+
+            const totalNetoCell = worksheet.getCell(`K${realRowsTotal + 2}`);
+            totalNetoCell.value = dataToInsert.totalNeto;
+
+            const lastRowED = worksheet.lastRow.number;
+            worksheet.pageSetup.printArea = `A1:K${lastRowED}`;
+            worksheet.views = [{ state: 'normal', showGridLines: true }];
+
+            const newFileName = `documento_${dataToInsert.invoiceSerie}_${dataToInsert.invoiceNumber}_${dataToInsert.invoicePais}_${tipoExcel}.xlsx`;
+            newFilePath = path.join(outputDir, newFileName);
+
+            await workbook.xlsx.writeFile(newFilePath);
         }
-    
+
         return newFilePath;
     }
 }
